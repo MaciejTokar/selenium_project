@@ -15,6 +15,12 @@ public class DashboardPage {
 
     private final WebDriverWait wait;
 
+    @FindBy(xpath = "//h6[normalize-space()='Dashboard']")
+    private WebElement dashboardHeader;
+
+    @FindBy(css = "a[href*='viewAdminModule']")
+    private WebElement adminButton;
+
     public DashboardPage() {
         initElements(getDriver(), this);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(1));
@@ -24,14 +30,8 @@ public class DashboardPage {
         return getDriver().getCurrentUrl();
     }
 
-    @FindBy(xpath = "//h6[normalize-space()='Dashboard']")
-    private WebElement dashboardHeader;
-
-    @FindBy(css = "a[href*='viewAdminModule']")
-    private WebElement adminPanelButton;
-
     public void clickAdminPanelButton() {
-        adminPanelButton.click();
+        adminButton.click();
     }
 
     public void assertionContainsDashboardUrl() {
