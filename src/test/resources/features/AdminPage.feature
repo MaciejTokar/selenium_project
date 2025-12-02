@@ -9,8 +9,8 @@ Feature: Admin page and every test case associated with admin set ups and users 
   Scenario: Creating user account for employee to the platform by admin
     Given I click 'Admin' panel on the header list
     And I click 'Add' button
-    And I select option 'ESS' in User Role selector
-    And I select option 'Enabled' in Status selector
+    And I select option 'ESS' in User Role dropdown
+    And I select option 'Enabled' in Status dropdown
     And I enter 'name' into Employee Name input and confirm
     And I enter 'username' into Username input
     And I enter 'TestPw123!' into Password input

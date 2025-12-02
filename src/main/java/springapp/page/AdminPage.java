@@ -1,7 +1,7 @@
 package springapp.page;
 
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,10 +20,10 @@ public class AdminPage {
     private WebElement addButton;
 
     @FindBy(css = ".oxd-grid-item--gutters:nth-of-type(1) .oxd-select-wrapper")
-    private WebElement userRoleSelector;
+    private WebElement userRoleDropDown;
 
     @FindBy(css = ".oxd-grid-item--gutters:nth-of-type(3) .oxd-select-wrapper")
-    private WebElement statusSelector;
+    private WebElement statusDropDown;
 
     @FindBy(xpath = "//span[text()='ESS']")
     private WebElement essOption;
@@ -65,18 +65,16 @@ public class AdminPage {
         addButton.click();
     }
 
-    public void clickUserRoleSelector() {
-        userRoleSelector.click();
+    public void clickUserRoleDropDown() {
+        userRoleDropDown.click();
     }
 
     public void clickEssOption() {
-        if (essOption.getText().equals("ESS")) {
-            essOption.click();
-        }
+        essOption.click();
     }
 
-    public void clickStatusSelector() {
-        statusSelector.click();
+    public void clickStatusDropDown() {
+        statusDropDown.click();
     }
 
     public void clickEnabledOption() {
@@ -89,7 +87,7 @@ public class AdminPage {
         employeeNameInput.sendKeys(userName.getText());
     }
 
-    public void clickEmployeeNameOption() throws InterruptedException {
+    public void clickEmployeeNameOption() {
 //        wait.until(ExpectedConditions.visibilityOf(employeeNameOption));
 //        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".oxd-autocomplete-option")));
 //        Thread.sleep(10000);
@@ -118,6 +116,6 @@ public class AdminPage {
 
     public void assertionSuccessPopUpDisplay() {
         wait.until(ExpectedConditions.visibilityOf(successPopUp));
-        Assertions.assertTrue(successPopUp.isDisplayed(), "Pop up is displayed");
+        Assertions.assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
     }
 }

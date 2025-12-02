@@ -19,20 +19,20 @@ public class AdminPageSteps {
         adminPage.clickAddButton();
     }
 
-    @And("I select option 'ESS' in User Role selector")
-    public void i_select_option_ess_in_user_role_selector() {
-        adminPage.clickUserRoleSelector();
+    @And("I select option 'ESS' in User Role dropdown")
+    public void i_select_option_ess_in_user_role_dropdown() {
+        adminPage.clickUserRoleDropDown();
         adminPage.clickEssOption();
     }
 
-    @And("I select option 'Enabled' in Status selector")
-    public void i_select_option_enabled_in_status_selector() {
-        adminPage.clickStatusSelector();
+    @And("I select option 'Enabled' in Status dropdown")
+    public void i_select_option_enabled_in_status_dropdown() {
+        adminPage.clickStatusDropDown();
         adminPage.clickEnabledOption();
     }
 
     @And("I enter 'name' into Employee Name input and confirm")
-    public void i_enter_name_into_employee_name_input_and_confirm() throws InterruptedException {
+    public void i_enter_name_into_employee_name_input_and_confirm() {
         adminPage.enterEmployeeNameInput();
         adminPage.clickEmployeeNameOption();
     }
