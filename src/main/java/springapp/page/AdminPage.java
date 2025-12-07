@@ -4,17 +4,20 @@ import org.openqa.selenium.WebElement;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
+import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
+import static springapp.utils.StringGeneratorUtils.getGeneratedPassword;
 
 public class AdminPage {
 
     private final WebDriverWait wait;
+    private String confirmPassword;
 
     @FindBy(css = ".oxd-button--secondary:nth-of-type(1)")
     private WebElement addButton;
@@ -28,7 +31,6 @@ public class AdminPage {
     @FindBy(xpath = "//span[text()='ESS']")
     private WebElement essOption;
 
-    //    @FindBy(xpath = "//span[text()='Enabled']")
     @FindBy(css = ".oxd-select-option:nth-of-type(2)")
     private WebElement enabledOption;
 
@@ -88,9 +90,6 @@ public class AdminPage {
     }
 
     public void clickEmployeeNameOption() {
-//        wait.until(ExpectedConditions.visibilityOf(employeeNameOption));
-//        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".oxd-autocomplete-option")));
-//        Thread.sleep(10000);
         try {
             wait.until(d -> false);
         } catch (TimeoutException ignored) {
@@ -99,15 +98,25 @@ public class AdminPage {
     }
 
     public void enterUsernameInput(String username) {
-        usernameInput.sendKeys(username);
+        if (username.equalsIgnoreCase("generate")) {
+            usernameInput.sendKeys(getUsername());
+        } else {
+            usernameInput.sendKeys(username);
+        }
     }
 
     public void enterPasswordInput(String password) {
-        passwordInput.sendKeys(password);
+        if (password.equalsIgnoreCase("generate")) {
+            confirmPassword = getGeneratedPassword();
+            passwordInput.sendKeys(confirmPassword);
+        } else {
+            confirmPassword = password;
+            passwordInput.sendKeys(confirmPassword);
+        }
     }
 
-    public void enterPasswordConfirmInput(String password) {
-        passwordConfirmInput.sendKeys(password);
+    public void enterPasswordConfirmInput() {
+        passwordConfirmInput.sendKeys(confirmPassword);
     }
 
     public void clickSaveButton() {

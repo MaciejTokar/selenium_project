@@ -4,8 +4,6 @@ import io.cucumber.java.en.And;
 import springapp.page.AdminPage;
 import io.cucumber.java.en.Then;
 
-import java.util.Random;
-
 public class AdminPageSteps {
 
     private final AdminPage adminPage;
@@ -39,18 +37,17 @@ public class AdminPageSteps {
 
     @And("I enter {string} into Username input")
     public void i_enter_username_into_username_input(String username) {
-        String randomUsername = username + new Random().nextInt(100);
-        adminPage.enterUsernameInput(randomUsername);
+            adminPage.enterUsernameInput(username);
     }
 
     @And("I enter {string} into Password input")
     public void i_enter_password_into_password_input(String password) {
-        adminPage.enterPasswordInput(password);
+            adminPage.enterPasswordInput(password);
     }
 
-    @And("I enter {string} into Confirm Password input")
-    public void i_enter_password_into_confirm_password_input(String password) {
-        adminPage.enterPasswordConfirmInput(password);
+    @And("I enter the same password into Confirm Password input")
+    public void i_enter_password_into_confirm_password_input() {
+        adminPage.enterPasswordConfirmInput();
     }
 
     @And("I click 'Save' button")
