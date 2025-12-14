@@ -16,4 +16,10 @@ Feature: Admin page and every test case associated with admin set ups and users 
     And I enter 'generate' into Password input
     And I enter the same password into Confirm Password input
     When I click 'Save' button
-    Then Confirmation is displayed and user has been created
+    Then Confirmation is displayed
+    Given I enter the same username which was included in account creation
+    And I select option 'ESS' in User Role dropdown
+    And I enter 'name' into Employee Name input and confirm
+    And I select option 'Enabled' in Status dropdown
+    And I click 'Search' button
+    Then Matching user account is displayed in the list
