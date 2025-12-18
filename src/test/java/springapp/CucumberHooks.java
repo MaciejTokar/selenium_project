@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
+import static springapp.driverSingleton.DriverConfiguration.getDriver;
+import static springapp.driverSingleton.DriverConfiguration.quitDriver;
+
 
 public class CucumberHooks {
 
@@ -18,6 +21,7 @@ public class CucumberHooks {
 
     @After
     public void afterScenario(final Scenario scenario) {
+        quitDriver();
         logger.info("Test scenario is ending: " + logger.getName());
     }
 }

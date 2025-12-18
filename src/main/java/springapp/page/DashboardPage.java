@@ -15,6 +15,12 @@ public class DashboardPage {
 
     private final WebDriverWait wait;
 
+    @FindBy(xpath = "//h6[normalize-space()='Dashboard']")
+    private WebElement dashboardHeader;
+
+    @FindBy(css = "a[href*='viewAdminModule']")
+    private WebElement adminButton;
+
     public DashboardPage() {
         initElements(getDriver(), this);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(1));
@@ -24,24 +30,21 @@ public class DashboardPage {
         return getDriver().getCurrentUrl();
     }
 
-    @FindBy(xpath = "//h6[normalize-space()='Dashboard']")
-    private WebElement dashboardHeader;
-
-    @FindBy(css = "a[href*='viewAdminModule']")
-    private WebElement adminPanelButton;
-
-    public void clickAdminPanelButton() {
-        adminPanelButton.click();
+    public DashboardPage clickAdminPanelButton() {
+        adminButton.click();
+        return this;
     }
 
-    public void assertionContainsDashboardUrl() {
+    public DashboardPage assertionContainsDashboardUrl() {
         String dashboardUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
         wait.until(ExpectedConditions.urlContains(dashboardUrl));
         Assertions.assertEquals(dashboardUrl, getDashboardUrl());
+        return this;
     }
 
-    public void assertionGetDashboardHeaderText() {
+    public DashboardPage assertionGetDashboardHeaderText() {
         wait.until(ExpectedConditions.visibilityOf(dashboardHeader));
         Assertions.assertEquals("Dashboard", dashboardHeader.getText());
+        return this;
     }
 }
