@@ -18,7 +18,6 @@ public class ForgotPasswordPage {
     @FindBy(css = ".orangehrm-forgot-password-title")
     private WebElement resetPasswordSuccessHeader;
 
-//    @FindBy(xpath = "//span[text()='Required']") - ktos na stronie zmienil jezyk i przestalo dzialac
     @FindBy(css = ".oxd-input-field-error-message")
     private WebElement requiredWarningSpan;
 
@@ -26,19 +25,23 @@ public class ForgotPasswordPage {
         initElements(getDriver(), this);
     }
 
-    public void enterUsernameInput(String username) {
+    public ForgotPasswordPage enterUsernameInput(String username) {
         usernameInput.sendKeys(username);
+        return this;
     }
 
-    public void clickResetPasswordButton() {
+    public ForgotPasswordPage clickResetPasswordButton() {
         resetPasswordButton.click();
+        return this;
     }
 
-    public void assertionSendResetPasswordLink() {
+    public ForgotPasswordPage assertionSendResetPasswordLink() {
         Assertions.assertEquals("Reset Password link sent successfully", resetPasswordSuccessHeader.getText());
+        return this;
     }
 
-    public void assertionUsernameRequired() {
+    public ForgotPasswordPage assertionUsernameRequired() {
         Assertions.assertEquals("Required", requiredWarningSpan.getText()); // jak ktos zmieni jezyk na stronie to przestaje dzialac
+        return this;
     }
 }

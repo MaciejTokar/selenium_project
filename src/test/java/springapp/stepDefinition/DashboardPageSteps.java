@@ -1,7 +1,7 @@
 package springapp.stepDefinition;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.Given;
 import springapp.page.DashboardPage;
 
 public class DashboardPageSteps {
@@ -19,7 +19,8 @@ public class DashboardPageSteps {
 
     @Then("User has been successfully logged in")
     public void user_has_been_successfully_logged_in() {
-        dashboardPage.assertionContainsDashboardUrl();
-        dashboardPage.assertionGetDashboardHeaderText();
+        dashboardPage
+                .assertionContainsDashboardUrl()
+                .assertionGetDashboardHeaderText();
     }
 }

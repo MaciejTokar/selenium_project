@@ -30,18 +30,21 @@ public class DashboardPage {
         return getDriver().getCurrentUrl();
     }
 
-    public void clickAdminPanelButton() {
+    public DashboardPage clickAdminPanelButton() {
         adminButton.click();
+        return this;
     }
 
-    public void assertionContainsDashboardUrl() {
+    public DashboardPage assertionContainsDashboardUrl() {
         String dashboardUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
         wait.until(ExpectedConditions.urlContains(dashboardUrl));
         Assertions.assertEquals(dashboardUrl, getDashboardUrl());
+        return this;
     }
 
-    public void assertionGetDashboardHeaderText() {
+    public DashboardPage assertionGetDashboardHeaderText() {
         wait.until(ExpectedConditions.visibilityOf(dashboardHeader));
         Assertions.assertEquals("Dashboard", dashboardHeader.getText());
+        return this;
     }
 }

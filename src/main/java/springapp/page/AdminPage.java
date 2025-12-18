@@ -1,7 +1,6 @@
 package springapp.page;
 
 import org.openqa.selenium.WebElement;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
@@ -91,47 +91,56 @@ public class AdminPage {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(7));
     }
 
-    public void clickAddButton() {
+    public AdminPage clickAddButton() {
         addButton.click();
+        return this;
     }
 
-    public void clickUserRoleDropDown() {
+    public AdminPage clickUserRoleDropDown() {
         userRoleDropDown.click();
+        return this;
     }
 
-    public void clickEssOption() {
+    public AdminPage clickEssOption() {
         essOption.click();
+        return this;
     }
 
-    public void clickAdminOption() {
+    public AdminPage clickAdminOption() {
         adminOption.click();
+        return this;
     }
 
-    public void clickStatusDropDown() {
+    public AdminPage clickStatusDropDown() {
         statusDropDown.click();
+        return this;
     }
 
-    public void clickEnabledOption() {
-            enabledOption.click();
+    public AdminPage clickEnabledOption() {
+        enabledOption.click();
+        return this;
     }
 
-    public void clickDisabledOption() {
+    public AdminPage clickDisabledOption() {
         disabledOption.click();
+        return this;
     }
 
-    public void enterEmployeeNameInput() {
+    public AdminPage enterEmployeeNameInput() {
         employeeNameInput.sendKeys(userName.getText());
+        return this;
     }
 
-    public void clickEmployeeNameOption() {
+    public AdminPage clickEmployeeNameOption() {
         try {
             wait.until(d -> false);
         } catch (TimeoutException ignored) {
             employeeNameOption.click();
         }
+        return this;
     }
 
-    public void enterUsernameInput(String username) {
+    public AdminPage enterUsernameInput(String username) {
         if (username.equalsIgnoreCase("generate")) {
             usernameSearch = getUsername();
             usernameInput.sendKeys(usernameSearch);
@@ -139,14 +148,16 @@ public class AdminPage {
             usernameSearch = username;
             usernameInput.sendKeys(usernameSearch);
         }
+        return this;
     }
 
-    public void enterUsernameInputSearch() {
+    public AdminPage enterUsernameInputSearch() {
         wait.until(ExpectedConditions.visibilityOf(systemUserHeader));
         usernameInputSearch.sendKeys(usernameSearch);
+        return this;
     }
 
-    public void enterPasswordInput(String password) {
+    public AdminPage enterPasswordInput(String password) {
         if (password.equalsIgnoreCase("generate")) {
             confirmPassword = getGeneratedPassword();
             passwordInput.sendKeys(confirmPassword);
@@ -154,27 +165,34 @@ public class AdminPage {
             confirmPassword = password;
             passwordInput.sendKeys(confirmPassword);
         }
+        return this;
     }
 
-    public void enterPasswordConfirmInput() {
+    public AdminPage enterPasswordConfirmInput() {
         passwordConfirmInput.sendKeys(confirmPassword);
+        return this;
     }
 
-    public void clickSaveButton() {
+    public AdminPage clickSaveButton() {
         saveButton.click();
+        return this;
     }
 
-    public void clickSearchButton() {
+    public AdminPage clickSearchButton() {
         searchButton.click();
+        return this;
     }
 
-    public void assertionSuccessPopUpDisplay() {
+    public AdminPage assertionSuccessPopUpDisplay() {
         wait.until(ExpectedConditions.visibilityOf(successPopUp));
-        Assertions.assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
+        assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
+        return this;
     }
 
-    public void assertionUserAccountMatchingData() {
-        Assertions.assertNotEquals("No Records Found", listHeader.getText().trim(), "No records found - the search didn't return any result");
-        Assertions.assertEquals(usernameSearch, cellUsername.getText());
+    public AdminPage assertionUserAccountMatchingData() {
+        assertNotEquals("No Records Found", listHeader.getText().trim(),
+                "No records found - the search didn't return any result");
+        assertEquals(usernameSearch, cellUsername.getText());
+        return this;
     }
 }

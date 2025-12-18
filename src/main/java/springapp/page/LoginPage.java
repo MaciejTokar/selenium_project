@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
@@ -32,27 +33,32 @@ public class LoginPage {
 
     public LoginPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(1));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
     }
 
-    public void enterUsernameInput(String login) {
+    public LoginPage enterUsernameInput(String login) {
         usernameInput.sendKeys(login);
+        return this;
     }
 
-    public void enterPasswordInput(String password) {
+    public LoginPage enterPasswordInput(String password) {
         passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton() {
+    public LoginPage clickLoginButton() {
         loginButton.click();
+        return this;
     }
 
-    public void clickForgotPasswordButton() {
+    public LoginPage clickForgotPasswordButton() {
         forgotPasswordButton.click();
+        return this;
     }
 
-    public void assertionGetInvalidCredentialsText() {
+    public LoginPage assertionGetInvalidCredentialsText() {
         wait.until(ExpectedConditions.visibilityOf(invalidCredentialsLabel));
-        Assertions.assertEquals("Invalid credentials", invalidCredentialsLabel.getText());
+        assertEquals("Invalid credentials", invalidCredentialsLabel.getText());
+        return this;
     }
 }

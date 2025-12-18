@@ -50,8 +50,9 @@ public class AdminPageSteps {
 
     @And("I enter 'name' into Employee Name input and confirm")
     public void i_enter_name_into_employee_name_input_and_confirm() {
-        adminPage.enterEmployeeNameInput();
-        adminPage.clickEmployeeNameOption();
+        adminPage
+                .enterEmployeeNameInput()
+                .clickEmployeeNameOption();
     }
 
     @And("I enter {string} into Username input")
