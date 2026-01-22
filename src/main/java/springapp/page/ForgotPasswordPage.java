@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
-public class ForgotPasswordPage {
+public class ForgotPasswordPage extends BasePage {
 
     @FindBy(name = "username")
     private WebElement usernameInput;
@@ -26,12 +26,12 @@ public class ForgotPasswordPage {
     }
 
     public ForgotPasswordPage enterUsernameInput(String username) {
-        usernameInput.sendKeys(username);
+        typeText(usernameInput, username);
         return this;
     }
 
     public ForgotPasswordPage clickResetPasswordButton() {
-        resetPasswordButton.click();
+        clickButton(resetPasswordButton);
         return this;
     }
 
