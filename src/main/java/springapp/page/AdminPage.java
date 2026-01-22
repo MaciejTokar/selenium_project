@@ -6,15 +6,14 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 import static springapp.utils.StringGeneratorUtils.getGeneratedPassword;
 
-public class AdminPage {
+public class AdminPage extends BasePage {
 
     private final WebDriverWait wait;
     private String confirmPassword;
@@ -88,46 +87,47 @@ public class AdminPage {
 
     public AdminPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(7));
+        wait = new WebDriverWait(getDriver(), getTimeoutDuration());
+//        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(7));
     }
 
     public AdminPage clickAddButton() {
-        addButton.click();
+        clickButton(addButton);
         return this;
     }
 
     public AdminPage clickUserRoleDropDown() {
-        userRoleDropDown.click();
+        clickButton(userRoleDropDown);
         return this;
     }
 
     public AdminPage clickEssOption() {
-        essOption.click();
+        clickButton(essOption);
         return this;
     }
 
     public AdminPage clickAdminOption() {
-        adminOption.click();
+        clickButton(adminOption);
         return this;
     }
 
     public AdminPage clickStatusDropDown() {
-        statusDropDown.click();
+        clickButton(statusDropDown);
         return this;
     }
 
     public AdminPage clickEnabledOption() {
-        enabledOption.click();
+        clickButton(enabledOption);
         return this;
     }
 
     public AdminPage clickDisabledOption() {
-        disabledOption.click();
+        clickButton(disabledOption);
         return this;
     }
 
     public AdminPage enterEmployeeNameInput() {
-        employeeNameInput.sendKeys(userName.getText());
+        typeText(employeeNameInput, userName.getText());
         return this;
     }
 
@@ -135,7 +135,7 @@ public class AdminPage {
         try {
             wait.until(d -> false);
         } catch (TimeoutException ignored) {
-            employeeNameOption.click();
+            clickButton(employeeNameOption);
         }
         return this;
     }
@@ -143,43 +143,43 @@ public class AdminPage {
     public AdminPage enterUsernameInput(String username) {
         if (username.equalsIgnoreCase("generate")) {
             usernameSearch = getUsername();
-            usernameInput.sendKeys(usernameSearch);
+            typeText(usernameInput, usernameSearch);
         } else {
             usernameSearch = username;
-            usernameInput.sendKeys(usernameSearch);
+            typeText(usernameInput, usernameSearch);
         }
         return this;
     }
 
     public AdminPage enterUsernameInputSearch() {
         wait.until(ExpectedConditions.visibilityOf(systemUserHeader));
-        usernameInputSearch.sendKeys(usernameSearch);
+        typeText(usernameInputSearch, usernameSearch);
         return this;
     }
 
     public AdminPage enterPasswordInput(String password) {
         if (password.equalsIgnoreCase("generate")) {
             confirmPassword = getGeneratedPassword();
-            passwordInput.sendKeys(confirmPassword);
+            typeText(passwordInput, confirmPassword);
         } else {
             confirmPassword = password;
-            passwordInput.sendKeys(confirmPassword);
+            typeText(passwordInput, confirmPassword);
         }
         return this;
     }
 
     public AdminPage enterPasswordConfirmInput() {
-        passwordConfirmInput.sendKeys(confirmPassword);
+        typeText(passwordConfirmInput, confirmPassword);
         return this;
     }
 
     public AdminPage clickSaveButton() {
-        saveButton.click();
+        clickButton(saveButton);
         return this;
     }
 
     public AdminPage clickSearchButton() {
-        searchButton.click();
+        clickButton(searchButton);
         return this;
     }
 

@@ -11,7 +11,7 @@ import java.time.Duration;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
-public class DashboardPage {
+public class DashboardPage extends BasePage {
 
     private final WebDriverWait wait;
 
@@ -31,7 +31,7 @@ public class DashboardPage {
     }
 
     public DashboardPage clickAdminPanelButton() {
-        adminButton.click();
+        clickButton(adminButton);
         return this;
     }
 

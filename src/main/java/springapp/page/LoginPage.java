@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     private final WebDriverWait wait;
 
@@ -37,22 +37,22 @@ public class LoginPage {
     }
 
     public LoginPage enterUsernameInput(String login) {
-        usernameInput.sendKeys(login);
+        typeText(usernameInput, login);
         return this;
     }
 
     public LoginPage enterPasswordInput(String password) {
-        passwordInput.sendKeys(password);
+        typeText(passwordInput, password);
         return this;
     }
 
     public LoginPage clickLoginButton() {
-        loginButton.click();
+        clickButton(loginButton);
         return this;
     }
 
     public LoginPage clickForgotPasswordButton() {
-        forgotPasswordButton.click();
+        clickButton(forgotPasswordButton);
         return this;
     }
 
