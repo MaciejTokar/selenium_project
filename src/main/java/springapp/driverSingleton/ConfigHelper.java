@@ -32,6 +32,10 @@ public class ConfigHelper {
         return getProperty("password");
     }
 
+    public static String getScreenshotFilePath() {
+        return getProperty("screenshot.file.path");
+    }
+
     private static String getProperty(String key) {
         try (InputStream is = ConfigHelper.class
                 .getClassLoader()

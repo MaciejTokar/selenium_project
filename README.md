@@ -1,9 +1,3 @@
-//TODO
-Opisać pattern tworzenia nazw metod w ramach działania na web elementach
-solid - poczytac
-zrobic test w admin panelu
-dodac pullrequest i reviewera
-
 # Project Description
 This project is an example of Selenium automated tests, utilizing Cucumber technology within BDD (Behavior-Driven Development) scenarios and following proper Page Object Pattern practices.
 The system allows running tests on the Orange HRM demo website.
