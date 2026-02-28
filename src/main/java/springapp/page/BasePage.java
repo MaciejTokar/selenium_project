@@ -14,7 +14,7 @@ import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class BasePage {
 
-    private final static Logger LOGGER = LogManager.getLogger(BasePage.class);
+    private final Logger LOGGER = LogManager.getLogger(this);
     private final Actions actions;
     private final WebDriverWait wait;
     private final JavascriptExecutor js;
@@ -49,6 +49,16 @@ public class BasePage {
                 LOGGER.info("Button \"" + button + "\" clicked using JavaScript");
             }
         }
+    }
+
+    protected void doubleClickButton(WebElement button) {
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(button));
+        LOGGER.info("Button is clickable");
+                actions
+                        .moveToElement(webElement)
+                        .doubleClick()
+                        .build()
+                        .perform();
     }
 
     protected void typeText(WebElement input, String text) {

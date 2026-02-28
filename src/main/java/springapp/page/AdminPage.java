@@ -7,11 +7,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 import static springapp.utils.StringGeneratorUtils.getGeneratedPassword;
+import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class AdminPage extends BasePage {
 
@@ -88,7 +88,6 @@ public class AdminPage extends BasePage {
     public AdminPage() {
         initElements(getDriver(), this);
         wait = new WebDriverWait(getDriver(), getTimeoutDuration());
-//        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(7));
     }
 
     public AdminPage clickAddButton() {
@@ -127,6 +126,7 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterEmployeeNameInput() {
+        wait.until(ExpectedConditions.visibilityOf(employeeNameInput));
         typeText(employeeNameInput, userName.getText());
         return this;
     }

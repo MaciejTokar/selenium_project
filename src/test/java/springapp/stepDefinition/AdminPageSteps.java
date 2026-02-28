@@ -33,7 +33,6 @@ public class AdminPageSteps {
         } else {
             throw new AssertionError("Invalid option for user role");
         }
-
     }
 
     @And("I select option {string} in Status dropdown")
