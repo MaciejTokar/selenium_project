@@ -24,16 +24,22 @@ public class LeavePageSteps extends BasePageSteps {
         leavePage.clickAssignLeaveButton();
     }
 
+//    @And("I select option {string} in Leave Type dropdown")
+//    public void i_select_option_in_leave_type_dropdown(String option) {
+//        leavePage.clickLeaveTypeDropDown();
+//        if (option.regionMatches(true, 0, "CAN", 0, 3)) {
+//            leavePage.clickCanOption();
+//        } else if (option.regionMatches(true, 0, "US", 0, 2)) {
+//            leavePage.clickUsOption();
+//        } else {
+//            throw new AssertionError("Invalid option for leave type");
+//        }
+//    }
+
     @And("I select option {string} in Leave Type dropdown")
     public void i_select_option_in_leave_type_dropdown(String option) {
         leavePage.clickLeaveTypeDropDown();
-        if (option.regionMatches(true, 0, "CAN", 0, 3)) {
-            leavePage.clickCanOption();
-        } else if (option.regionMatches(true, 0, "US", 0, 2)) {
-            leavePage.clickUsOption();
-        } else {
-            throw new AssertionError("Invalid option for leave type");
-        }
+        leavePage.selectLeaveTypeFromList(option);
     }
 
     @And("I enter date {string} into From Date input")
@@ -49,21 +55,23 @@ public class LeavePageSteps extends BasePageSteps {
     @And("I select option {string} in Partial Days dropdown")
     public void i_select_option_in_partial_days_dropdown(String option) throws InterruptedException {
         leavePage.clickPartialDaysDropDown();
-        if (option.equalsIgnoreCase("All Days")) {
-            leavePage.clickAllDaysOption();
-        } else {
-            throw new AssertionError("Invalid option for partial days");
-        }
+        leavePage.selectPartialDaysFromList(option);
+//        if (option.equalsIgnoreCase("All Days")) {
+//            leavePage.clickAllDaysOption();
+//        } else {
+//            throw new AssertionError("Invalid option for partial days");
+//        }
     }
 
     @And("I select option {string} in Duration dropdown")
     public void i_select_option_in_duration_dropdown(String option) {
         leavePage.clickDurationDropDown();
-        if (option.equalsIgnoreCase("Half Day - Morning")) {
-            leavePage.clickHalfDayMorningOption();
-        } else {
-            throw new AssertionError("Invalid option for duration");
-        }
+        leavePage.selectDurationFromList(option);
+//        if (option.equalsIgnoreCase("Half Day - Morning")) {
+//            leavePage.clickHalfDayMorningOption();
+//        } else {
+//            throw new AssertionError("Invalid option for duration");
+//        }
     }
 
     @And("I click 'Assign' button")

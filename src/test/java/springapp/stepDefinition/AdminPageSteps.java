@@ -2,6 +2,8 @@ package springapp.stepDefinition;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import springapp.page.AdminPage;
 import io.cucumber.java.en.Given;
 
@@ -52,6 +54,14 @@ public class AdminPageSteps {
         adminPage
                 .enterEmployeeNameInput()
                 .clickEmployeeNameOption();
+    }
+
+//    daje tu _1 w nazwie metody, ponieważ powyższa również jest wykorzystywana w innym teście i na razie nie chce rozwalić innych testów - i tak potem będzie to przerabiane
+    @And("I enter name {string} into Employee Name input and confirm")
+    public void i_enter_name_into_employee_name_input_and_confirm_1(String name) {
+            adminPage
+                    .enterEmployeeNameInput2(name)
+                    .clickEmployeeNameOption2(name);
     }
 
     @And("I enter {string} into Username input")

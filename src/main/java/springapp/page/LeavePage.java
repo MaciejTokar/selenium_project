@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
@@ -59,6 +60,18 @@ public class LeavePage extends BasePage {
     @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
     private List<WebElement> listOfLeaveType;
 
+    @FindBy(xpath = "//form/div[3]/div/div[1]/div[@class='oxd-input-group oxd-input-field-bottom-space']/span")
+    private WebElement invalidFromDateLabel;
+
+    @FindBy(xpath = "//form/div[3]/div/div[2]/div[@class='oxd-input-group oxd-input-field-bottom-space']/span")
+    private WebElement invalidToDateLabel;
+
+    @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
+    private List<WebElement> listOfPartialDays;
+
+    @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
+    private List<WebElement> listOfDuration;
+
     public LeavePage clickAssignLeaveButton() {
         clickButton(assignLeaveButton);
         return this;
@@ -90,15 +103,12 @@ public class LeavePage extends BasePage {
     }
 
     public LeavePage clickPartialDaysDropDown() throws InterruptedException {
-//        Thread.sleep(Duration.ofMillis(6000));
         doubleClickButton(partialDaysDropDown);
         return this;
     }
 
     public LeavePage clickAllDaysOption() throws InterruptedException {
-//        Thread.sleep(Duration.ofMillis(6000));
         clickButton(allDaysOption);
-//        allDaysOption.click();
         return this;
     }
 
@@ -131,5 +141,35 @@ public class LeavePage extends BasePage {
          return listOfLeaveType.stream()
                  .map(WebElement::getText)
                  .collect(Collectors.toList());
+    }
+
+    public LeavePage selectLeaveTypeFromList(String leaveType) {
+        for (WebElement option : listOfLeaveType) {
+            if (option.getText().equals(leaveType)) {
+                option.click();
+                return this;
+            }
+        }
+        throw new NoSuchElementException("Leave type not found " + leaveType);
+    }
+
+    public LeavePage selectPartialDaysFromList(String partial) {
+        for (WebElement option : listOfPartialDays) {
+            if (option.getText().equals(partial)) {
+                option.click();
+                return this;
+            }
+        }
+        throw new NoSuchElementException("Leave type not found " + partial);
+    }
+
+    public LeavePage selectDurationFromList(String duration) {
+        for (WebElement option : listOfDuration) {
+            if (option.getText().equals(duration)) {
+                option.click();
+                return this;
+            }
+        }
+        throw new NoSuchElementException("Leave type not found " + duration);
     }
 }
