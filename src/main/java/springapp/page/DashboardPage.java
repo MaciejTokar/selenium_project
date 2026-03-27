@@ -51,7 +51,7 @@ public class DashboardPage extends BasePage {
     }
 
     public DashboardPage assertionGetDashboardHeaderText() {
-        wait.until(ExpectedConditions.visibilityOf(dashboardHeader));
+        waitForVisibility(dashboardHeader);
         Assertions.assertEquals("Dashboard", dashboardHeader.getText());
         return this;
     }

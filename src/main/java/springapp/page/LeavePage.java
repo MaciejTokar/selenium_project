@@ -6,26 +6,22 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
+import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
-public class LeavePage extends BasePage {
-    private final WebDriverWait wait;
+public class LeavePage extends CommonPage {
 
-    public LeavePage() {
-        initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), getTimeoutDuration());
-    }
+    private final WebDriverWait webDriverWait;
 
     @FindBy(xpath = "//li[7]/a[@class='oxd-topbar-body-nav-tab-item']")
     private WebElement assignLeaveButton;
 
     @FindBy(css = ".oxd-select-text")
-    private WebElement leaveTypeDropDown;
+    protected WebElement leaveTypeDropDown;
 
     @FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option'][3]/span")
     private WebElement canOption;
@@ -34,22 +30,22 @@ public class LeavePage extends BasePage {
     private WebElement usOption;
 
     @FindBy(xpath = "(//div[contains(@class,'oxd-input-group')]//div[@class='oxd-date-input'])[1]/input")
-    private WebElement fromDate;
+    protected WebElement fromDateElement;
 
     @FindBy(xpath = "(//div[contains(@class,'oxd-input-group')]//div[@class='oxd-date-input'])[2]/input")
-    private WebElement toDate;
+    protected WebElement toDateElement;
 
     @FindBy(xpath = "(//div[contains(@class,'oxd-input-group')]//div[@class='oxd-select-wrapper'])[2]/div/div[2]")
-    private WebElement partialDaysDropDown;
+    protected WebElement partialDaysDropDown;
 
     @FindBy(xpath = "//div[@role='listbox']//span[normalize-space()='All Days'] | //div[@role='listbox']//div[@role='option' and normalize-space()='All Days']")
     private WebElement allDaysOption;
 
     @FindBy(xpath = "(//div[contains(@class,'oxd-input-group')]//div[@class='oxd-select-wrapper'])[3]/div/div[2]")
-    private WebElement durationDropDown;
+    protected WebElement durationDropDown;
 
     @FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option'][2]")
-    private WebElement halfDayMorningOption;
+    protected WebElement halfDayMorningOption;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement assignButton;
@@ -58,7 +54,7 @@ public class LeavePage extends BasePage {
     private WebElement confirmButton;
 
     @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
-    private List<WebElement> listOfLeaveType;
+    protected List<WebElement> listOfLeaveType;
 
     @FindBy(xpath = "//form/div[3]/div/div[1]/div[@class='oxd-input-group oxd-input-field-bottom-space']/span")
     private WebElement invalidFromDateLabel;
@@ -67,10 +63,19 @@ public class LeavePage extends BasePage {
     private WebElement invalidToDateLabel;
 
     @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
-    private List<WebElement> listOfPartialDays;
+    protected List<WebElement> listOfPartialDays;
 
     @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
-    private List<WebElement> listOfDuration;
+    protected List<WebElement> listOfDuration;
+
+    @FindBy(css = ".oxd-userdropdown-name")
+    protected WebElement userName;
+
+    public LeavePage() {
+        super();
+        initElements(getDriver(), this);
+        webDriverWait = new WebDriverWait(getDriver(), getTimeoutDuration());
+    }
 
     public LeavePage clickAssignLeaveButton() {
         clickButton(assignLeaveButton);
@@ -93,21 +98,21 @@ public class LeavePage extends BasePage {
     }
 
     public LeavePage enterFromDateInput(String date) {
-        typeText(fromDate, date);
+        typeText(fromDateElement, date);
         return this;
     }
 
     public LeavePage enterToDateInput(String date) {
-        typeText(toDate, date);
+        typeText(toDateElement, date);
         return this;
     }
 
-    public LeavePage clickPartialDaysDropDown() throws InterruptedException {
+    public LeavePage clickPartialDaysDropDown() {
         doubleClickButton(partialDaysDropDown);
         return this;
     }
 
-    public LeavePage clickAllDaysOption() throws InterruptedException {
+    public LeavePage clickAllDaysOption() {
         clickButton(allDaysOption);
         return this;
     }
@@ -129,18 +134,13 @@ public class LeavePage extends BasePage {
 
     public LeavePage clickConfirmButton() {
         clickButton(confirmButton);
-//        try {
-//            wait.until(d -> false);
-//        } catch (TimeoutException ignored) {
-//            clickButton(confirmButton);
-//        }
         return this;
     }
 
     public List<String> getListOfLeaveTypes() {
-         return listOfLeaveType.stream()
-                 .map(WebElement::getText)
-                 .collect(Collectors.toList());
+        return listOfLeaveType.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 
     public LeavePage selectLeaveTypeFromList(String leaveType) {

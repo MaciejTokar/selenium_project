@@ -1,11 +1,8 @@
 package springapp.page;
 
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static springapp.utils.StringGeneratorUtils.getUsername;
@@ -61,9 +58,6 @@ public class AdminPage extends BasePage {
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement saveButton;
-
-    @FindBy(css = ".oxd-toast--success")
-    private WebElement successPopUp;
 
     @FindBy(xpath = "//div[@class='oxd-input-group oxd-input-field-bottom-space']/div/input[1]")
     private WebElement usernameInputSearch;
@@ -130,46 +124,23 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterEmployeeNameInput() {
-        wait.until(ExpectedConditions.visibilityOf(employeeNameInput));
+        waitForVisibility(employeeNameInput);
         typeText(employeeNameInput, userName.getText());
         return this;
     }
 
-    //    analogiczny przypadek - dodaje metode, aby nie rozwalic poprzednich testow
-    public AdminPage enterEmployeeNameInput2(String name) {
-        wait.until(ExpectedConditions.visibilityOf(employeeNameInput));
-        if (name.equalsIgnoreCase("valid")) {
-            typeText(employeeNameInput, userName.getText());
-        } else if (name.equalsIgnoreCase("invalid")) {
-            typeText(employeeNameInput, "/.,[]");
-        }
-
-        return this;
-    }
-
     public AdminPage clickEmployeeNameOption() {
-        try {
-            wait.until(d -> false);
-        } catch (TimeoutException ignored) {
-            clickButton(employeeNameOption);
-        }
+        runAfterTimeout(() -> clickButton(employeeNameOption));
         return this;
     }
 
     public AdminPage clickEmployeeNameOption2(String name) {
-//        try {
-//            wait.until(d -> false);
-//        } catch (TimeoutException ignored) {
-//            clickButton(employeeNameOption);
-            if (name.equalsIgnoreCase("invalid")) {
-                try {
-                    wait.until(d -> false);
-                } catch (TimeoutException ignored) {
-                    clickButton(employeeNameOption);
-//                nie widze nigdzie message tego assertions?
-                wait.until(ExpectedConditions.visibilityOf(invalidEmployeeNameLabel));
-                Assertions.assertTrue(invalidEmployeeNameLabel.isDisplayed(), "Validation of employee name has been displayed");
-            }
+        if (name.equalsIgnoreCase("invalid")) {
+            runAfterTimeout(() -> clickButton(employeeNameOption));
+            waitForVisibility(invalidEmployeeNameLabel);
+            assertTrue(invalidEmployeeNameLabel.isDisplayed(), "Validation of employee name hasn't been displayed");
+        } else if (name.equalsIgnoreCase("valid")) {
+            runAfterTimeout(() -> clickButton(employeeNameOption));
         }
         return this;
     }
@@ -186,7 +157,7 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterUsernameInputSearch() {
-        wait.until(ExpectedConditions.visibilityOf(systemUserHeader));
+        waitForVisibility(systemUserHeader);
         typeText(usernameInputSearch, usernameSearch);
         return this;
     }
@@ -214,12 +185,6 @@ public class AdminPage extends BasePage {
 
     public AdminPage clickSearchButton() {
         clickButton(searchButton);
-        return this;
-    }
-
-    public AdminPage assertionSuccessPopUpDisplay() {
-        wait.until(ExpectedConditions.visibilityOf(successPopUp));
-        assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
         return this;
     }
 

@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-//        TODO
-//        do powtorzenia
 //        DRY -  Dont repeat yourself
 //        KISS - keep it simple stupid
+//        TODO
+//        wyszukac webelement dla warning popupu i zrobic analogiczna metode jak do success popupu
     }
 }

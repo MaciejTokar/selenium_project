@@ -2,21 +2,29 @@ package springapp.stepDefinition;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import springapp.page.LeavePage;
 import io.cucumber.java.en.Given;
+import springapp.page.CommonPage;
+import io.cucumber.datatable.DataTable;
 import org.junit.jupiter.api.Assertions;
+import springapp.actions.LeavePageActions;
 
 import java.util.List;
 import java.util.Collections;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static springapp.page.enums.LeaveType.listOfRequiredLeaveTypes;
 
-public class LeavePageSteps extends BasePageSteps {
+public class LeavePageSteps extends CommonPage {
     private final LeavePage leavePage;
+    private final LeavePageActions leavePageActions;
 
     public LeavePageSteps() {
+        super();
         leavePage = new LeavePage();
+        leavePageActions = new LeavePageActions();
     }
 
     @Given("I click on 'Assign Leave' button of navigation")
@@ -24,22 +32,10 @@ public class LeavePageSteps extends BasePageSteps {
         leavePage.clickAssignLeaveButton();
     }
 
-//    @And("I select option {string} in Leave Type dropdown")
-//    public void i_select_option_in_leave_type_dropdown(String option) {
-//        leavePage.clickLeaveTypeDropDown();
-//        if (option.regionMatches(true, 0, "CAN", 0, 3)) {
-//            leavePage.clickCanOption();
-//        } else if (option.regionMatches(true, 0, "US", 0, 2)) {
-//            leavePage.clickUsOption();
-//        } else {
-//            throw new AssertionError("Invalid option for leave type");
-//        }
-//    }
-
     @And("I select option {string} in Leave Type dropdown")
     public void i_select_option_in_leave_type_dropdown(String option) {
-        leavePage.clickLeaveTypeDropDown();
-        leavePage.selectLeaveTypeFromList(option);
+        leavePage.clickLeaveTypeDropDown()
+                .selectLeaveTypeFromList(option);
     }
 
     @And("I enter date {string} into From Date input")
@@ -53,25 +49,15 @@ public class LeavePageSteps extends BasePageSteps {
     }
 
     @And("I select option {string} in Partial Days dropdown")
-    public void i_select_option_in_partial_days_dropdown(String option) throws InterruptedException {
-        leavePage.clickPartialDaysDropDown();
-        leavePage.selectPartialDaysFromList(option);
-//        if (option.equalsIgnoreCase("All Days")) {
-//            leavePage.clickAllDaysOption();
-//        } else {
-//            throw new AssertionError("Invalid option for partial days");
-//        }
+    public void i_select_option_in_partial_days_dropdown(String option) {
+        leavePage.clickPartialDaysDropDown()
+                .selectPartialDaysFromList(option);
     }
 
     @And("I select option {string} in Duration dropdown")
     public void i_select_option_in_duration_dropdown(String option) {
-        leavePage.clickDurationDropDown();
-        leavePage.selectDurationFromList(option);
-//        if (option.equalsIgnoreCase("Half Day - Morning")) {
-//            leavePage.clickHalfDayMorningOption();
-//        } else {
-//            throw new AssertionError("Invalid option for duration");
-//        }
+        leavePage.clickDurationDropDown()
+                .selectDurationFromList(option);
     }
 
     @And("I click 'Assign' button")
@@ -82,6 +68,13 @@ public class LeavePageSteps extends BasePageSteps {
     @And("I click 'Ok' confirm button")
     public void i_click_ok_confirm_button() {
         leavePage.clickConfirmButton();
+    }
+
+    @When("I enter Assign Leave details")
+    public void i_enter_assign_leave_details(DataTable dataTable) {
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+
+        leavePageActions.enterAssignLeaveDetails(dataMap);
     }
 
     @Then("Validate required options of Leave Type")

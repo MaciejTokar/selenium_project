@@ -1,10 +1,8 @@
 package springapp.stepDefinition;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import springapp.page.AdminPage;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 
 public class AdminPageSteps {
@@ -56,14 +54,6 @@ public class AdminPageSteps {
                 .clickEmployeeNameOption();
     }
 
-//    daje tu _1 w nazwie metody, ponieważ powyższa również jest wykorzystywana w innym teście i na razie nie chce rozwalić innych testów - i tak potem będzie to przerabiane
-    @And("I enter name {string} into Employee Name input and confirm")
-    public void i_enter_name_into_employee_name_input_and_confirm_1(String name) {
-            adminPage
-                    .enterEmployeeNameInput2(name)
-                    .clickEmployeeNameOption2(name);
-    }
-
     @And("I enter {string} into Username input")
     public void i_enter_username_into_username_input(String username) {
         adminPage.enterUsernameInput(username);
@@ -87,11 +77,6 @@ public class AdminPageSteps {
     @And("I click 'Search' button")
     public void i_click_search_button() {
         adminPage.clickSearchButton();
-    }
-
-    @Then("Confirmation is displayed")
-    public void confirmation_is_displayed() {
-        adminPage.assertionSuccessPopUpDisplay();
     }
 
     @Then("Matching user account is displayed in the list")
