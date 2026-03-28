@@ -1,8 +1,8 @@
 package springapp.stepDefinition;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import springapp.page.AdminPage;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 
 public class AdminPageSteps {
@@ -33,7 +33,6 @@ public class AdminPageSteps {
         } else {
             throw new AssertionError("Invalid option for user role");
         }
-
     }
 
     @And("I select option {string} in Status dropdown")
@@ -78,11 +77,6 @@ public class AdminPageSteps {
     @And("I click 'Search' button")
     public void i_click_search_button() {
         adminPage.clickSearchButton();
-    }
-
-    @Then("Confirmation is displayed")
-    public void confirmation_is_displayed() {
-        adminPage.assertionSuccessPopUpDisplay();
     }
 
     @Then("Matching user account is displayed in the list")

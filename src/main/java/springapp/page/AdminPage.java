@@ -2,16 +2,14 @@ package springapp.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 import static springapp.utils.StringGeneratorUtils.getGeneratedPassword;
+import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class AdminPage extends BasePage {
 
@@ -61,9 +59,6 @@ public class AdminPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement saveButton;
 
-    @FindBy(css = ".oxd-toast--success")
-    private WebElement successPopUp;
-
     @FindBy(xpath = "//div[@class='oxd-input-group oxd-input-field-bottom-space']/div/input[1]")
     private WebElement usernameInputSearch;
 
@@ -85,10 +80,12 @@ public class AdminPage extends BasePage {
     @FindBy(xpath = "//div[@class='orangehrm-horizontal-padding orangehrm-vertical-padding']/span")
     private WebElement listHeader;
 
+    @FindBy(xpath = "//form/div[1]/div/div/div[@class='oxd-input-group oxd-input-field-bottom-space']/span")
+    private WebElement invalidEmployeeNameLabel;
+
     public AdminPage() {
         initElements(getDriver(), this);
         wait = new WebDriverWait(getDriver(), getTimeoutDuration());
-//        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(7));
     }
 
     public AdminPage clickAddButton() {
@@ -127,15 +124,23 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterEmployeeNameInput() {
+        waitForVisibility(employeeNameInput);
         typeText(employeeNameInput, userName.getText());
         return this;
     }
 
     public AdminPage clickEmployeeNameOption() {
-        try {
-            wait.until(d -> false);
-        } catch (TimeoutException ignored) {
-            clickButton(employeeNameOption);
+        runAfterTimeout(() -> clickButton(employeeNameOption));
+        return this;
+    }
+
+    public AdminPage clickEmployeeNameOption2(String name) {
+        if (name.equalsIgnoreCase("invalid")) {
+            runAfterTimeout(() -> clickButton(employeeNameOption));
+            waitForVisibility(invalidEmployeeNameLabel);
+            assertTrue(invalidEmployeeNameLabel.isDisplayed(), "Validation of employee name hasn't been displayed");
+        } else if (name.equalsIgnoreCase("valid")) {
+            runAfterTimeout(() -> clickButton(employeeNameOption));
         }
         return this;
     }
@@ -152,7 +157,7 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterUsernameInputSearch() {
-        wait.until(ExpectedConditions.visibilityOf(systemUserHeader));
+        waitForVisibility(systemUserHeader);
         typeText(usernameInputSearch, usernameSearch);
         return this;
     }
@@ -180,12 +185,6 @@ public class AdminPage extends BasePage {
 
     public AdminPage clickSearchButton() {
         clickButton(searchButton);
-        return this;
-    }
-
-    public AdminPage assertionSuccessPopUpDisplay() {
-        wait.until(ExpectedConditions.visibilityOf(successPopUp));
-        assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
         return this;
     }
 

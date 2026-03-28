@@ -14,7 +14,7 @@ import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class BasePage {
 
-    private final static Logger LOGGER = LogManager.getLogger(BasePage.class);
+    private final Logger logger = LogManager.getLogger(this);
     private final Actions actions;
     private final WebDriverWait wait;
     private final JavascriptExecutor js;
@@ -26,15 +26,34 @@ public class BasePage {
         js = (JavascriptExecutor) getDriver();
     }
 
+    public static String requireNotBlank(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new NullPointerException("String can't be null or empty");
+        }
+        return value;
+    }
+
+    public void waitForVisibility(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void runAfterTimeout(Runnable action) {
+        try {
+            wait.until(d -> false);
+        } catch (TimeoutException ignored) {
+            action.run();
+        }
+    }
+
     protected void clickButton(WebElement button) {
         WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(button));
-        LOGGER.info("Button is clickable");
+        logger.info("Button is clickable");
 
         try {
             webElement.click();
-            LOGGER.info("Button: \"" + button + "\" clicked using standard click()");
+            logger.info("Button: \"" + button + "\" clicked using standard click()");
         } catch (WebDriverException e) {
-            LOGGER.warn("Standard click() failed, trying Actions click()", e);
+            logger.warn("Standard click() failed, trying Actions click()", e);
             try {
                 actions
                         .moveToElement(webElement)
@@ -42,26 +61,36 @@ public class BasePage {
                         .build()
                         .perform();
 
-                LOGGER.info("Button \"" + button + "\" clicked using Actions");
+                logger.info("Button \"" + button + "\" clicked using Actions");
             } catch (MoveTargetOutOfBoundsException | ElementNotInteractableException | NoSuchElementException e2) {
-                LOGGER.warn("Actions click failed, trying JavaScript click()", e2);
+                logger.warn("Actions click failed, trying JavaScript click()", e2);
                 js.executeScript("arguments[0].click();", webElement);
-                LOGGER.info("Button \"" + button + "\" clicked using JavaScript");
+                logger.info("Button \"" + button + "\" clicked using JavaScript");
             }
         }
     }
 
+    protected void doubleClickButton(WebElement button) {
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(button));
+        logger.info("Button is clickable");
+        actions
+                .moveToElement(webElement)
+                .doubleClick()
+                .build()
+                .perform();
+    }
+
     protected void typeText(WebElement input, String text) {
         WebElement webElement = wait.until(ExpectedConditions.visibilityOf(input));
-        LOGGER.info("Input is visible");
+        logger.info("Input is visible");
 
         clearObject(input);
 
         try {
             webElement.sendKeys(text);
-            LOGGER.info("Text: \"" + text + "\" typed into the input: \"" + input + "\" by standard sendKeys()");
+            logger.info("Text: \"" + text + "\" typed into the input: \"" + input + "\" by standard sendKeys()");
         } catch (WebDriverException e) {
-            LOGGER.warn("Standard sendKeys() failed, trying Actions sendKeys()", e);
+            logger.warn("Standard sendKeys() failed, trying Actions sendKeys()", e);
             try {
                 actions
                         .moveToElement(webElement)
@@ -69,11 +98,11 @@ public class BasePage {
                         .build()
                         .perform();
 
-                LOGGER.info("Text: \"" + text + "\" typed into the input: \"" + input + "\" using Actions");
+                logger.info("Text: \"" + text + "\" typed into the input: \"" + input + "\" using Actions");
             } catch (MoveTargetOutOfBoundsException | NoSuchElementException e2) {
-                LOGGER.warn("Actions sendKeys() failed, trying JavaScript sendKeys()", e2);
+                logger.warn("Actions sendKeys() failed, trying JavaScript sendKeys()", e2);
                 js.executeScript("arguments[0].value = arguments[1];", webElement, text);
-                LOGGER.info("Text \"" + text + "\" typed using JavaScript into the input: \"" + input + "\"");
+                logger.info("Text \"" + text + "\" typed using JavaScript into the input: \"" + input + "\"");
             }
         }
     }
@@ -82,20 +111,20 @@ public class BasePage {
         try {
             element.clear();
         } catch (NoSuchElementException | InvalidElementStateException e) {
-            LOGGER.warn("Unsuccessful clearing");
+            logger.warn("Unsuccessful clearing");
         }
 
         try {
             element.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "A"));
             element.sendKeys(Keys.DELETE);
         } catch (NoSuchElementException | InvalidElementStateException e2) {
-            LOGGER.warn("Unsuccessful clearing");
+            logger.warn("Unsuccessful clearing");
         }
 
         try {
             js.executeScript("arguments[0].value = '';", element);
         } catch (NoSuchElementException | InvalidElementStateException e3) {
-            LOGGER.warn("Unsuccessful clearing");
+            logger.warn("Unsuccessful clearing");
         }
     }
 }

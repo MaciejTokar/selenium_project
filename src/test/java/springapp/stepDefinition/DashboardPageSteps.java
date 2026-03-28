@@ -17,6 +17,11 @@ public class DashboardPageSteps {
         dashboardPage.clickAdminPanelButton();
     }
 
+    @Then("I click 'Leave' panel on the header list")
+    public void i_click_leave_panel_on_the_header_list() {
+        dashboardPage.clickLeavePanelButton();
+    }
+
     @Then("User has been successfully logged in")
     public void user_has_been_successfully_logged_in() {
         dashboardPage

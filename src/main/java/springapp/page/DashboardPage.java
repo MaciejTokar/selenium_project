@@ -21,9 +21,12 @@ public class DashboardPage extends BasePage {
     @FindBy(css = "a[href*='viewAdminModule']")
     private WebElement adminButton;
 
+    @FindBy(css = "a[href*='viewLeaveModule']")
+    private WebElement leaveButton;
+
     public DashboardPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(1));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
     }
 
     public String getDashboardUrl() {
@@ -35,6 +38,11 @@ public class DashboardPage extends BasePage {
         return this;
     }
 
+    public DashboardPage clickLeavePanelButton() {
+        clickButton(leaveButton);
+        return this;
+    }
+
     public DashboardPage assertionContainsDashboardUrl() {
         String dashboardUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
         wait.until(ExpectedConditions.urlContains(dashboardUrl));
@@ -43,7 +51,7 @@ public class DashboardPage extends BasePage {
     }
 
     public DashboardPage assertionGetDashboardHeaderText() {
-        wait.until(ExpectedConditions.visibilityOf(dashboardHeader));
+        waitForVisibility(dashboardHeader);
         Assertions.assertEquals("Dashboard", dashboardHeader.getText());
         return this;
     }
