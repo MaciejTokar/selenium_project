@@ -21,9 +21,9 @@ Feature: Leave page and every test case associated with annual leave set up.
     Then Confirmation is displayed
 
     Examples:
-      | name    | options    | fromDate   | toDate     | partial  | duration             |
+      | name    | options           | fromDate   | toDate     | partial           | duration             |
       | valid   | CAN - Bereavement | 2026-05-02 | 2026-10-02 | All Days          | Half Day - Morning   |
-      | valid | CAN - FMLA | 2026-05-02 | 2026-10-02 | All Days | Half Day - Afternoon |
+      | valid   | CAN - FMLA        | 2026-05-02 | 2026-10-02 | All Days          | Half Day - Afternoon |
       | invalid | CAN - Matternity  | 2026.05.02 | 2026.10.02 | All Days          | Specify Time         |
       | valid   | CAN - Personal    | 2026-05-02 | 2026-10-02 | Start Day Only    | Half Day - Morning   |
       | valid   | CAN - Vacation    | 02-05-2026 | 02-10-2026 | Start Day Only    | Half Day - Afternoon |
@@ -48,17 +48,17 @@ Feature: Leave page and every test case associated with annual leave set up.
     Then Confirmation is displayed
 
     Examples:
-      | name  | options           | fromDate   | toDate     | partial  | duration           |
-      | valid | US - FMLA | 2026-05-02 | 2026-10-02 | All Days | Half Day - Morning |
-      | invalid | CAN - FMLA        | 2026-05-02 | 2026-10-02 | All Days          | Half Day - Afternoon |
-      | invalid | CAN - Matternity  | 2026.05.02 | 2026.10.02 | All Days          | Specify Time         |
-      | valid   | CAN - Personal    | 2026-05-02 | 2026-10-02 | Start Day Only    | Half Day - Morning   |
-      | valid   | CAN - Vacation    | 02-05-2026 | 02-10-2026 | Start Day Only    | Half Day - Afternoon |
-      | valid   | US - Bereavement  | 2026-05-02 | 2026-10-02 | Start Day Only    | Specify Time         |
-      | valid   | US - FMLA         | 2026-05-02 | 2026-10-02 | End Day Only      | Half Day - Morning   |
-      | valid   | US - Matternity   | 2026-05-02 | 2026-10-02 | End Day Only      | Half Day - Afternoon |
-      | valid   | US - Personal     | 2026-05-02 | 2026-10-02 | End Day Only      | Specify Time         |
-      | valid   | US - Vacation     | 2026-05-02 | 2026-10-02 | Start And End Day | Half Day - Morning   |
+      | name    | options          | fromDate   | toDate     | partial           | duration             |
+      | valid   | US - FMLA        | 2026-05-02 | 2026-10-02 | All Days          | Half Day - Morning   |
+      | invalid | CAN - FMLA       | 2026-05-02 | 2026-10-02 | All Days          | Half Day - Afternoon |
+      | invalid | CAN - Matternity | 2026.05.02 | 2026.10.02 | All Days          | Specify Time         |
+      | valid   | CAN - Personal   | 2026-05-02 | 2026-10-02 | Start Day Only    | Half Day - Morning   |
+      | valid   | CAN - Vacation   | 02-05-2026 | 02-10-2026 | Start Day Only    | Half Day - Afternoon |
+      | valid   | US - Bereavement | 2026-05-02 | 2026-10-02 | Start Day Only    | Specify Time         |
+      | valid   | US - FMLA        | 2026-05-02 | 2026-10-02 | End Day Only      | Half Day - Morning   |
+      | valid   | US - Matternity  | 2026-05-02 | 2026-10-02 | End Day Only      | Half Day - Afternoon |
+      | valid   | US - Personal    | 2026-05-02 | 2026-10-02 | End Day Only      | Specify Time         |
+      | valid   | US - Vacation    | 2026-05-02 | 2026-10-02 | Start And End Day | Half Day - Morning   |
 
 #    When I enter Assign Leave details - inny przykład zapisu
 #      | name   | options   | fromDate   | toDate   | partial   | duration   |

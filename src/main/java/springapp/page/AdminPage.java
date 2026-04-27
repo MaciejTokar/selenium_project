@@ -1,8 +1,12 @@
 package springapp.page;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import springapp.object.AdminPageCsvData;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static springapp.utils.StringGeneratorUtils.getUsername;
@@ -82,6 +86,18 @@ public class AdminPage extends BasePage {
 
     @FindBy(xpath = "//form/div[1]/div/div/div[@class='oxd-input-group oxd-input-field-bottom-space']/span")
     private WebElement invalidEmployeeNameLabel;
+
+    @FindAll(@FindBy(css = "div.oxd-table-row > div.oxd-table-cell.oxd-padding-cell:nth-child(2)"))
+    private List<WebElement> listOfUsername;
+
+    @FindAll(@FindBy(css = "div.oxd-table-row > div.oxd-table-cell.oxd-padding-cell:nth-child(3)"))
+    private List<WebElement> listOfUserRole;
+
+    @FindAll(@FindBy(css = "div.oxd-table-row > div.oxd-table-cell.oxd-padding-cell:nth-child(4)"))
+    private List<WebElement> listOfEmployeeName;
+
+    @FindAll(@FindBy(css = "div.oxd-table-row > div.oxd-table-cell.oxd-padding-cell:nth-child(5)"))
+    private List<WebElement> listOfStatus;
 
     public AdminPage() {
         initElements(getDriver(), this);
@@ -193,5 +209,45 @@ public class AdminPage extends BasePage {
                 "No records found - the search didn't return any result");
         assertEquals(usernameSearch, cellUsername.getText());
         return this;
+    }
+//
+//    public Map<WebElement, String> mapUsernameValues() {
+//        return listOfUsername.stream()
+//                .collect(Collectors.toMap(item -> item, item -> "Username"));
+//    }
+//
+//    public Map<WebElement, String> mapUserRoleValues() {
+//        return listOfUserRole.stream()
+//                .collect(Collectors.toMap(item -> item, item -> "User Role"));
+//    }
+//
+//    public Map<WebElement, String> mapEmployeeNameValues() {
+//        return listOfEmployeeName.stream()
+//                .collect(Collectors.toMap(item -> item, item -> "Employee Name"));
+//    }
+//
+//    public Map<WebElement, String> mapStatusValues() {
+//        return listOfStatus.stream()
+//                .collect(Collectors.toMap(item -> item, item -> "Status"));
+//    }
+
+    public void compareAdminPageDataWithCsv(List<AdminPageCsvData> adminPageCsvData) {
+        for (int i = 0; i < adminPageCsvData.size(); i++) {
+            String username = listOfUsername.get(i).getText();
+            String userRole = listOfUserRole.get(i).getText();
+            String employeeName = listOfEmployeeName.get(i).getText();
+            String status = listOfStatus.get(i).getText();
+
+            String csvUsername = adminPageCsvData.get(i).getUsername();
+            String csvUserRole = adminPageCsvData.get(i).getUserRole();
+            String csvEmployeeName = adminPageCsvData.get(i).getEmployeeName();
+            String csvStatus = adminPageCsvData.get(i).getStatus();
+
+            softAssert.assertEquals(username, csvUsername, username + " = " + csvUsername);
+            softAssert.assertEquals(userRole, csvUserRole, userRole + " = " + csvUserRole);
+            softAssert.assertEquals(employeeName, csvEmployeeName, employeeName + " = " + csvEmployeeName);
+            softAssert.assertEquals(status, csvStatus, status + " = " + csvStatus);
+        }
+        softAssert.assertAll();
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
+import springapp.utils.SoftAssert;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
@@ -18,12 +19,14 @@ public class BasePage {
     private final Actions actions;
     private final WebDriverWait wait;
     private final JavascriptExecutor js;
+    protected final SoftAssert softAssert;
 
     public BasePage() {
         initElements(getDriver(), this);
         actions = new Actions(getDriver());
         wait = new WebDriverWait(getDriver(), getTimeoutDuration());
         js = (JavascriptExecutor) getDriver();
+        softAssert = new SoftAssert();
     }
 
     public static String requireNotBlank(String value) {
