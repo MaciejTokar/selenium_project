@@ -31,6 +31,9 @@ public class CommonPage extends BasePage {
     @FindBy(css = ".oxd-toast--success")
     private WebElement successPopUp;
 
+    @FindBy(css = ".oxd-toast--info")
+    private WebElement infoPopUp;
+
     public CommonPage() {
         initElements(getDriver(), this);
         wait = new WebDriverWait(getDriver(), getTimeoutDuration());
@@ -61,6 +64,12 @@ public class CommonPage extends BasePage {
     public CommonPage assertionSuccessPopUpDisplay() {
         wait.until(ExpectedConditions.visibilityOf(successPopUp));
         assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
+        return this;
+    }
+
+    public CommonPage assertionInfoPopUpDisplay() {
+        wait.until(ExpectedConditions.visibilityOf(infoPopUp));
+        assertTrue(infoPopUp.isDisplayed(), "After searching user account info is displayed");
         return this;
     }
 }

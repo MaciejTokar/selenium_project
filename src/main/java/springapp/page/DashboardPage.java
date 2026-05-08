@@ -24,6 +24,9 @@ public class DashboardPage extends BasePage {
     @FindBy(css = "a[href*='viewLeaveModule']")
     private WebElement leaveButton;
 
+    @FindBy(css = "a[href*='viewPerformanceModule']")
+    private WebElement performanceButton;
+
     public DashboardPage() {
         initElements(getDriver(), this);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
@@ -40,6 +43,11 @@ public class DashboardPage extends BasePage {
 
     public DashboardPage clickLeavePanelButton() {
         clickButton(leaveButton);
+        return this;
+    }
+
+    public DashboardPage clickPerformancePanelButton() {
+        clickButton(performanceButton);
         return this;
     }
 

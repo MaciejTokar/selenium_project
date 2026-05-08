@@ -160,7 +160,7 @@ public class LeavePage extends CommonPage {
                 return this;
             }
         }
-        throw new NoSuchElementException("Leave type not found " + partial);
+        throw new NoSuchElementException("Partial not found " + partial);
     }
 
     public LeavePage selectDurationFromList(String duration) {
@@ -170,6 +170,6 @@ public class LeavePage extends CommonPage {
                 return this;
             }
         }
-        throw new NoSuchElementException("Leave type not found " + duration);
+        throw new NoSuchElementException("Duration not found " + duration);
     }
 }

@@ -48,4 +48,10 @@ public class CsvUtils {
 
         return result;
     }
+
+    public static void validateCsvAndListSize(int csvData, int list) {
+        if (csvData != list) {
+            throw new AssertionError("Size of CSV doesn't match size of available data:\n" + "CSV size: " + csvData + "\nData size " + list);
+        }
+    }
 }

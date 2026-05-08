@@ -22,6 +22,11 @@ public class DashboardPageSteps {
         dashboardPage.clickLeavePanelButton();
     }
 
+    @Then("I click 'Performance' panel on the header list")
+    public void i_click_performance_panel_on_the_header_list() {
+        dashboardPage.clickPerformancePanelButton();
+    }
+
     @Then("User has been successfully logged in")
     public void user_has_been_successfully_logged_in() {
         dashboardPage

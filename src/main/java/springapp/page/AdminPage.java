@@ -1,14 +1,15 @@
 package springapp.page;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import springapp.object.AdminPageCsvData;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static springapp.utils.CsvUtils.validateCsvAndListSize;
 import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
@@ -210,28 +211,10 @@ public class AdminPage extends BasePage {
         assertEquals(usernameSearch, cellUsername.getText());
         return this;
     }
-//
-//    public Map<WebElement, String> mapUsernameValues() {
-//        return listOfUsername.stream()
-//                .collect(Collectors.toMap(item -> item, item -> "Username"));
-//    }
-//
-//    public Map<WebElement, String> mapUserRoleValues() {
-//        return listOfUserRole.stream()
-//                .collect(Collectors.toMap(item -> item, item -> "User Role"));
-//    }
-//
-//    public Map<WebElement, String> mapEmployeeNameValues() {
-//        return listOfEmployeeName.stream()
-//                .collect(Collectors.toMap(item -> item, item -> "Employee Name"));
-//    }
-//
-//    public Map<WebElement, String> mapStatusValues() {
-//        return listOfStatus.stream()
-//                .collect(Collectors.toMap(item -> item, item -> "Status"));
-//    }
 
     public void compareAdminPageDataWithCsv(List<AdminPageCsvData> adminPageCsvData) {
+        validateCsvAndListSize(adminPageCsvData.size(), listOfUsername.size());
+
         for (int i = 0; i < adminPageCsvData.size(); i++) {
             String username = listOfUsername.get(i).getText();
             String userRole = listOfUserRole.get(i).getText();
@@ -243,10 +226,10 @@ public class AdminPage extends BasePage {
             String csvEmployeeName = adminPageCsvData.get(i).getEmployeeName();
             String csvStatus = adminPageCsvData.get(i).getStatus();
 
-            softAssert.assertEquals(username, csvUsername, username + " = " + csvUsername);
-            softAssert.assertEquals(userRole, csvUserRole, userRole + " = " + csvUserRole);
-            softAssert.assertEquals(employeeName, csvEmployeeName, employeeName + " = " + csvEmployeeName);
-            softAssert.assertEquals(status, csvStatus, status + " = " + csvStatus);
+            softAssert.compareField("Username", username, csvUsername, i);
+            softAssert.compareField("User Role", userRole, csvUserRole, i);
+            softAssert.compareField("Employee Name", employeeName, csvEmployeeName, i);
+            softAssert.compareField("Status", status, csvStatus, i);
         }
         softAssert.assertAll();
     }

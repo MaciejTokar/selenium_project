@@ -1,13 +1,13 @@
 package springapp.page;
 
 import org.openqa.selenium.*;
+import springapp.utils.SoftAssert;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
-import springapp.utils.SoftAssert;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;

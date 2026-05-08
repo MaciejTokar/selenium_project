@@ -22,4 +22,9 @@ public class CommonPageSteps {
     public void confirmation_is_displayed() {
         commonPage.assertionSuccessPopUpDisplay();
     }
+
+    @Then("No results found information is displayed")
+    public void no_results_found_information_is_displayed() {
+        commonPage.assertionInfoPopUpDisplay();
+    }
 }

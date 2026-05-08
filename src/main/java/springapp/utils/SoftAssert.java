@@ -41,7 +41,7 @@ public class SoftAssert {
     public void assertEquals(Object actual, Object expected, String message) {
         try {
             if (actual.equals(expected)) {
-                passed.add("Passed: " + message);
+                passed.add(message);
             } else {
                 throw new AssertionError(message);
             }
@@ -72,5 +72,16 @@ public class SoftAssert {
 
             throw assertionError;
         }
+    }
+
+    public void compareField(String columnName, String actual, String expected, int row) {
+        assertEquals(
+                actual,
+                expected,
+                "\nRow: " + row +
+                        "\nColumn: " + columnName +
+                        "\nExpected CSV: " + expected +
+                        "\nActual UI: " + actual + "\n"
+        );
     }
 }

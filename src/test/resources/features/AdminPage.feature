@@ -26,4 +26,5 @@ Feature: Admin page and every test case associated with admin set ups and users 
 
   Scenario: Compare user records compatibility in table of admin panel
     Given I click 'Admin' panel on the header list
-    And I verify compatibility data of records with csv file
+    When I fetch the expected list of users
+    Then I verify compatibility data of records with csv file
