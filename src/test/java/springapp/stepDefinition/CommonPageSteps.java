@@ -5,10 +5,11 @@ import io.cucumber.java.en.Then;
 import springapp.page.CommonPage;
 
 public class CommonPageSteps {
+
     private final CommonPage commonPage;
 
-    public CommonPageSteps(CommonPage commonPage) {
-        this.commonPage = commonPage;
+    public CommonPageSteps() {
+        commonPage = new CommonPage();
     }
 
     @And("I enter name {string} into Employee Name input and confirm")

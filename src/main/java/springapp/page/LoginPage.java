@@ -2,17 +2,12 @@ package springapp.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
 public class LoginPage extends BasePage {
-
-    private final WebDriverWait wait;
 
     @FindBy(name = "username")
     private WebElement usernameInput;
@@ -31,7 +26,6 @@ public class LoginPage extends BasePage {
 
     public LoginPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
     }
 
     public LoginPage enterUsernameInput(String login) {
@@ -55,7 +49,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage assertionGetInvalidCredentialsText() {
-        waitForVisibility(invalidCredentialsLabel);
+        waitHelper.waitForVisibility(invalidCredentialsLabel);
         assertEquals("Invalid credentials", invalidCredentialsLabel.getText());
         return this;
     }

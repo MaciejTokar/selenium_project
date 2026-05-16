@@ -1,16 +1,13 @@
 package springapp.stepDefinition;
 
 import io.cucumber.java.en.And;
-import springapp.page.CommonPage;
 import springapp.page.PerformancePage;
 
 public class PerformancePageSteps {
 
     private final PerformancePage performancePage;
-    private final CommonPage commonPage;
 
-    public PerformancePageSteps(CommonPage commonPage) {
-        this.commonPage = commonPage;
+    public PerformancePageSteps() {
         performancePage = new PerformancePage();
     }
 

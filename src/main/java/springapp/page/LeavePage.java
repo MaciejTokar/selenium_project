@@ -3,7 +3,6 @@ package springapp.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,11 +10,8 @@ import java.util.NoSuchElementException;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
-public class LeavePage extends CommonPage {
-
-    private final WebDriverWait webDriverWait;
+public class LeavePage extends BasePage {
 
     @FindBy(xpath = "//li[7]/a[@class='oxd-topbar-body-nav-tab-item']")
     private WebElement assignLeaveButton;
@@ -72,9 +68,7 @@ public class LeavePage extends CommonPage {
     protected WebElement userName;
 
     public LeavePage() {
-        super();
         initElements(getDriver(), this);
-        webDriverWait = new WebDriverWait(getDriver(), getTimeoutDuration());
     }
 
     public LeavePage clickAssignLeaveButton() {

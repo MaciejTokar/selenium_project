@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import springapp.object.AdminPageCsvData;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -14,11 +13,9 @@ import static springapp.utils.StringGeneratorUtils.getUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 import static springapp.utils.StringGeneratorUtils.getGeneratedPassword;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class AdminPage extends BasePage {
 
-    private final WebDriverWait wait;
     private String confirmPassword;
     private String usernameSearch;
 
@@ -102,7 +99,6 @@ public class AdminPage extends BasePage {
 
     public AdminPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), getTimeoutDuration());
     }
 
     public AdminPage clickAddButton() {
@@ -141,23 +137,22 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterEmployeeNameInput() {
-        waitForVisibility(employeeNameInput);
         typeText(employeeNameInput, userName.getText());
         return this;
     }
 
     public AdminPage clickEmployeeNameOption() {
-        runAfterTimeout(() -> clickButton(employeeNameOption));
+        waitHelper.runAfterTimeout(() -> clickButton(employeeNameOption));
         return this;
     }
 
     public AdminPage clickEmployeeNameOption2(String name) {
         if (name.equalsIgnoreCase("invalid")) {
-            runAfterTimeout(() -> clickButton(employeeNameOption));
-            waitForVisibility(invalidEmployeeNameLabel);
+            waitHelper.runAfterTimeout(() -> clickButton(employeeNameOption));
+            waitHelper.waitForVisibility(invalidEmployeeNameLabel);
             assertTrue(invalidEmployeeNameLabel.isDisplayed(), "Validation of employee name hasn't been displayed");
         } else if (name.equalsIgnoreCase("valid")) {
-            runAfterTimeout(() -> clickButton(employeeNameOption));
+            waitHelper.runAfterTimeout(() -> clickButton(employeeNameOption));
         }
         return this;
     }
@@ -174,7 +169,7 @@ public class AdminPage extends BasePage {
     }
 
     public AdminPage enterUsernameInputSearch() {
-        waitForVisibility(systemUserHeader);
+        waitHelper.waitForVisibility(systemUserHeader);
         typeText(usernameInputSearch, usernameSearch);
         return this;
     }

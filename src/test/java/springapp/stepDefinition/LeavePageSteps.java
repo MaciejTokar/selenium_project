@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import springapp.page.LeavePage;
 import io.cucumber.java.en.Given;
-import springapp.page.CommonPage;
 import io.cucumber.datatable.DataTable;
 import org.junit.jupiter.api.Assertions;
 import springapp.actions.LeavePageActions;
@@ -17,12 +16,12 @@ import java.util.stream.Stream;
 
 import static springapp.page.enums.LeaveType.listOfRequiredLeaveTypes;
 
-public class LeavePageSteps extends CommonPage {
+public class LeavePageSteps {
+
     private final LeavePage leavePage;
     private final LeavePageActions leavePageActions;
 
     public LeavePageSteps() {
-        super();
         leavePage = new LeavePage();
         leavePageActions = new LeavePageActions();
     }
@@ -89,7 +88,9 @@ public class LeavePageSteps extends CommonPage {
                 .distinct()
                 .toList();
 
-        listOfLeaveTypes.forEach(LOGGER::info);
+//        listOfLeaveTypes.forEach(getLogger()::info);
+        listOfLeaveTypes.forEach(leavePage.getLogger()::info);
+
 
         Assertions.assertEquals(listOfRequiredLeaveTypes, listOfLeaveTypes,
                 "Leave Type error:\nexpected values: " + listOfRequiredLeaveTypes + "\nactual values: " + listOfLeaveTypes + "\nunexpected values: " + listOfUnexpectedLeaveTypes);

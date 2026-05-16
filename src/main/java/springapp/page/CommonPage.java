@@ -1,20 +1,13 @@
 package springapp.page;
 
 import org.openqa.selenium.WebElement;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.FindBy;
-import org.apache.logging.log4j.LogManager;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class CommonPage extends BasePage {
-    protected final Logger LOGGER = LogManager.getLogger(this);
-    private final WebDriverWait wait;
 
     @FindBy(css = ".oxd-autocomplete-text-input input")
     protected WebElement employeeNameInput;
@@ -36,11 +29,10 @@ public class CommonPage extends BasePage {
 
     public CommonPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), getTimeoutDuration());
     }
 
     public CommonPage enterEmployeeNameInput(String name) {
-        waitForVisibility(employeeNameInput);
+        waitHelper.waitForVisibility(employeeNameInput);
         if (name.equalsIgnoreCase("valid")) {
             typeText(employeeNameInput, userName.getText());
         } else if (name.equalsIgnoreCase("invalid")) {
@@ -51,24 +43,24 @@ public class CommonPage extends BasePage {
 
     public CommonPage clickEmployeeNameOption(String name) {
         if (name.equalsIgnoreCase("invalid")) {
-            runAfterTimeout(() -> clickButton(employeeNameOption));
-            wait.until(ExpectedConditions.visibilityOf(invalidEmployeeNameLabel));
+            waitHelper.runAfterTimeout(() -> clickButton(employeeNameOption));
+            waitHelper.waitForVisibility(invalidEmployeeNameLabel);
             assertTrue(invalidEmployeeNameLabel.isDisplayed(), "Validation of employee name hasn't been displayed");
         } else if (name.equalsIgnoreCase("valid")) {
-            runAfterTimeout(() -> clickButton(employeeNameOption));
+            waitHelper.runAfterTimeout(() -> clickButton(employeeNameOption));
         }
 
         return this;
     }
 
     public CommonPage assertionSuccessPopUpDisplay() {
-        wait.until(ExpectedConditions.visibilityOf(successPopUp));
+        waitHelper.waitForVisibility(successPopUp);
         assertTrue(successPopUp.isDisplayed(), "After creating user account success confirmation is displayed");
         return this;
     }
 
     public CommonPage assertionInfoPopUpDisplay() {
-        wait.until(ExpectedConditions.visibilityOf(infoPopUp));
+        waitHelper.waitForVisibility(infoPopUp);
         assertTrue(infoPopUp.isDisplayed(), "After searching user account info is displayed");
         return this;
     }
