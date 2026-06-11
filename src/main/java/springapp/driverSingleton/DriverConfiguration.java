@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 
 import static springapp.driverSingleton.ConfigHelper.getBaseUrl;
+import static springapp.driverSingleton.ConfigHelper.getHeadless;
 
 public class DriverConfiguration {
 
@@ -21,6 +22,11 @@ public class DriverConfiguration {
             chromeOptions.addArguments("--window-size=1920,1080");
             chromeOptions.addArguments("--start-maximized");
             chromeOptions.addArguments("--disable-gpu");
+            chromeOptions.addArguments("--remote-allow-origins=*");
+            boolean isHeadlessMode = Boolean.parseBoolean(getHeadless());
+            if (isHeadlessMode) {
+                chromeOptions.addArguments("--headless=new");
+            }
             webDriver = new ChromeDriver(chromeOptions);
             openBrowser();
         }
