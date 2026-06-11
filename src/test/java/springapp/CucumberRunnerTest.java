@@ -7,7 +7,9 @@ import org.junit.platform.suite.api.SelectClasspathResource;
 import org.junit.platform.suite.api.Suite;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
 import static io.cucumber.junit.platform.engine.Constants.*;
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
     @Suite
     @IncludeEngines("cucumber")
@@ -17,7 +19,7 @@ import static io.cucumber.junit.platform.engine.Constants.*;
     @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty"
             + ", junit:target/cucumber-reports/Cucumber.xml"
             + ", json:target/cucumber-reports/Cucumber.json"
-//            + ", io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+            + ", io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     )
     @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "springapp")
     @ConfigurationParameter(key = PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, value = "true")
