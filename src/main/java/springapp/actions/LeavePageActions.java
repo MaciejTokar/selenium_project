@@ -1,5 +1,6 @@
 package springapp.actions;
 
+import springapp.page.CommonPage;
 import springapp.page.LeavePage;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,10 +13,12 @@ import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 public class LeavePageActions extends LeavePage {
 
     private final WebDriverWait webDriverWait;
+    private final CommonPage commonPage;
 
     public LeavePageActions() {
         initElements(getDriver(), this);
         webDriverWait = new WebDriverWait(getDriver(), getTimeoutDuration());
+        commonPage = new CommonPage();
     }
 
     public LeavePageActions enterAssignLeaveDetails(Map<String, String> dataMap) {
@@ -27,8 +30,8 @@ public class LeavePageActions extends LeavePage {
         String partial = requireNotBlank(dataMap.get("partial"));
         String duration = requireNotBlank(dataMap.get("duration"));
 
-        enterEmployeeNameInput(name);
-        clickEmployeeNameOption(name);
+        commonPage.enterEmployeeNameInput(name);
+        commonPage.clickEmployeeNameOption(name);
 
         clickLeaveTypeDropDown();
         selectLeaveTypeFromList(options);

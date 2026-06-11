@@ -3,17 +3,11 @@ package springapp.page;
 import org.openqa.selenium.WebElement;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Duration;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
 public class DashboardPage extends BasePage {
-
-    private final WebDriverWait wait;
 
     @FindBy(xpath = "//h6[normalize-space()='Dashboard']")
     private WebElement dashboardHeader;
@@ -24,9 +18,11 @@ public class DashboardPage extends BasePage {
     @FindBy(css = "a[href*='viewLeaveModule']")
     private WebElement leaveButton;
 
+    @FindBy(css = "a[href*='viewPerformanceModule']")
+    private WebElement performanceButton;
+
     public DashboardPage() {
         initElements(getDriver(), this);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
     }
 
     public String getDashboardUrl() {
@@ -43,15 +39,20 @@ public class DashboardPage extends BasePage {
         return this;
     }
 
+    public DashboardPage clickPerformancePanelButton() {
+        clickButton(performanceButton);
+        return this;
+    }
+
     public DashboardPage assertionContainsDashboardUrl() {
         String dashboardUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-        wait.until(ExpectedConditions.urlContains(dashboardUrl));
+        waitHelper.waitForUrl(dashboardUrl);
         Assertions.assertEquals(dashboardUrl, getDashboardUrl());
         return this;
     }
 
     public DashboardPage assertionGetDashboardHeaderText() {
-        waitForVisibility(dashboardHeader);
+        waitHelper.waitForVisibility(dashboardHeader);
         Assertions.assertEquals("Dashboard", dashboardHeader.getText());
         return this;
     }

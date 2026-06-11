@@ -1,13 +1,20 @@
 package springapp.stepDefinition;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.When;
 import springapp.page.AdminPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
+import springapp.object.AdminPageCsvData;
+
+import java.util.List;
+
+import static springapp.utils.CsvUtils.readAdminData;
 
 public class AdminPageSteps {
 
     private final AdminPage adminPage;
+    private List<AdminPageCsvData> adminPageCsvData;
 
     public AdminPageSteps() {
         adminPage = new AdminPage();
@@ -16,6 +23,11 @@ public class AdminPageSteps {
     @Given("I enter the same username which was included in account creation")
     public void i_enter_the_same_username_which_was_included_in_account_creation() {
         adminPage.enterUsernameInputSearch();
+    }
+
+    @When("I fetch the expected list of users")
+    public void i_fetch_the_expected_list_of_users() {
+        adminPageCsvData = readAdminData("csv/usersOrangeHrm.csv");
     }
 
     @And("I click 'Add' button")
@@ -77,6 +89,11 @@ public class AdminPageSteps {
     @And("I click 'Search' button")
     public void i_click_search_button() {
         adminPage.clickSearchButton();
+    }
+
+    @Then("I verify compatibility data of records with csv file")
+    public void i_verify_compatibility_data_of_records_with_csv_file() {
+        adminPage.compareAdminPageDataWithCsv(adminPageCsvData);
     }
 
     @Then("Matching user account is displayed in the list")

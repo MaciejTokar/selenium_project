@@ -1,29 +1,32 @@
 package springapp.page;
 
+import lombok.Getter;
 import org.openqa.selenium.*;
+import springapp.utils.SoftAssert;
+import springapp.helpers.WaitHelper;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class BasePage {
 
-    private final Logger logger = LogManager.getLogger(this);
+    @Getter
+    protected final Logger logger = LogManager.getLogger(getClass());
+    protected final WaitHelper waitHelper;
+    protected final SoftAssert softAssert;
     private final Actions actions;
-    private final WebDriverWait wait;
     private final JavascriptExecutor js;
 
     public BasePage() {
         initElements(getDriver(), this);
         actions = new Actions(getDriver());
-        wait = new WebDriverWait(getDriver(), getTimeoutDuration());
+        waitHelper = new WaitHelper();
         js = (JavascriptExecutor) getDriver();
+        softAssert = new SoftAssert();
     }
 
     public static String requireNotBlank(String value) {
@@ -33,20 +36,8 @@ public class BasePage {
         return value;
     }
 
-    public void waitForVisibility(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void runAfterTimeout(Runnable action) {
-        try {
-            wait.until(d -> false);
-        } catch (TimeoutException ignored) {
-            action.run();
-        }
-    }
-
     protected void clickButton(WebElement button) {
-        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(button));
+        WebElement webElement = waitHelper.waitForClickable(button);
         logger.info("Button is clickable");
 
         try {
@@ -71,7 +62,7 @@ public class BasePage {
     }
 
     protected void doubleClickButton(WebElement button) {
-        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(button));
+        WebElement webElement = waitHelper.waitForClickable(button);
         logger.info("Button is clickable");
         actions
                 .moveToElement(webElement)
@@ -81,7 +72,7 @@ public class BasePage {
     }
 
     protected void typeText(WebElement input, String text) {
-        WebElement webElement = wait.until(ExpectedConditions.visibilityOf(input));
+        WebElement webElement = waitHelper.waitForVisibility(input);
         logger.info("Input is visible");
 
         clearObject(input);

@@ -23,3 +23,8 @@ Feature: Admin page and every test case associated with admin set ups and users 
     And I select option 'Enabled' in Status dropdown
     And I click 'Search' button
     Then Matching user account is displayed in the list
+
+  Scenario: Compare user records compatibility in table of admin panel
+    Given I click 'Admin' panel on the header list
+    When I fetch the expected list of users
+    Then I verify compatibility data of records with csv file

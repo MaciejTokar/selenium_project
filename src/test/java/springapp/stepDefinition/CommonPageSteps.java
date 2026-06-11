@@ -5,10 +5,11 @@ import io.cucumber.java.en.Then;
 import springapp.page.CommonPage;
 
 public class CommonPageSteps {
+
     private final CommonPage commonPage;
 
-    public CommonPageSteps(CommonPage commonPage) {
-        this.commonPage = commonPage;
+    public CommonPageSteps() {
+        commonPage = new CommonPage();
     }
 
     @And("I enter name {string} into Employee Name input and confirm")
@@ -21,5 +22,10 @@ public class CommonPageSteps {
     @Then("Confirmation is displayed")
     public void confirmation_is_displayed() {
         commonPage.assertionSuccessPopUpDisplay();
+    }
+
+    @Then("No results found information is displayed")
+    public void no_results_found_information_is_displayed() {
+        commonPage.assertionInfoPopUpDisplay();
     }
 }
