@@ -1,5 +1,6 @@
 package springapp.driverSingleton;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -43,7 +44,8 @@ public class DriverConfiguration {
 
     private static void openBrowser() {
         getDriver().get(getBaseUrl());
-        getDriver().manage().window().maximize();
+//        getDriver().manage().window().maximize();
+        getDriver().manage().window().setSize(new Dimension(1920,1080));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
     }
 }
