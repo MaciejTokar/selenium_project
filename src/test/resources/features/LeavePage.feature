@@ -7,7 +7,7 @@ Feature: Leave page and every test case associated with annual leave set up.
     When User has been successfully logged in
     Then I click 'Leave' panel on the header list
 
-  @smoke
+#  @smoke
   Scenario Outline: Verify that Assign Leave form works correctly with different variants of values
     Given I click on 'Assign Leave' button of navigation
     And I enter name "<name>" into Employee Name input and confirm
@@ -21,6 +21,8 @@ Feature: Leave page and every test case associated with annual leave set up.
 #    Tutaj przy tych samych ustawieniach raz wychodzi success,a raz inny pop up
     Then Confirmation is displayed
 
+#    TODO
+#    wykonac assert false do niektórych danych testowych
     Examples:
       | name    | options           | fromDate   | toDate     | partial           | duration             |
       | valid   | CAN - Bereavement | 2026-05-02 | 2026-10-02 | All Days          | Half Day - Morning   |

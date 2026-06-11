@@ -6,6 +6,7 @@ Feature: Admin page and every test case associated with admin set ups and users 
     When I click on 'Login' button
     Then User has been successfully logged in
 
+    @smoke
   Scenario: Creating user account for employee to the platform by admin
     Given I click 'Admin' panel on the header list
     And I click 'Add' button
