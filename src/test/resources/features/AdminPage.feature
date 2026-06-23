@@ -8,6 +8,7 @@ Feature: Admin page and every test case associated with admin set ups and users 
 
   @smoke
   @allure.label.jira:QA-123
+  @allure.label.jira:AE-2
   @allure.label.owner:MT
   @blocker
   Scenario: Creating user account for employee to the platform by admin
