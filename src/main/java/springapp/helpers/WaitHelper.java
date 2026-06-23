@@ -13,10 +13,8 @@ import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
 public class WaitHelper {
-    //        nowy helper, gdzie w konstruktorze jest fluent wait
-    private final FluentWait<WebDriver> fluentWait;
-//    private final FluentWait fluentWait; - raw use
 
+    private final FluentWait<WebDriver> fluentWait;
 
     public WaitHelper() {
         fluentWait = new FluentWait<>(getDriver())
@@ -26,7 +24,6 @@ public class WaitHelper {
                 .ignoring(TimeoutException.class);
     }
 
-
     public WebElement waitForVisibility(WebElement element) {
         try {
         fluentWait.until(ExpectedConditions.visibilityOf(element));
@@ -35,14 +32,6 @@ public class WaitHelper {
         }
         return  element;
     }
-
-//    public void waitForClickable(WebElement element) {
-//        try {
-//            fluentWait.until(ExpectedConditions.elementToBeClickable(element));
-//        } catch (TimeoutException e) {
-//            throw new TimeoutException("Element is not clickable " + element, e);
-//        }
-//    }
 
     public WebElement waitForClickable(WebElement element) {
         try {
