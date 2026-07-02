@@ -7,6 +7,7 @@ Feature: Performance page and every test case associated with performance and ma
     When User has been successfully logged in
     Then I click 'Performance' panel on the header list
 
+    @smoke
   Scenario Outline: Verify after searching for a user with incorrect data receive information that no results were found.
     Given I enter name "<name>" into Employee Name input and confirm
     And I select job title "<title>" in Job Title dropdown

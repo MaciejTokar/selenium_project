@@ -7,6 +7,7 @@ Feature: Admin page and every test case associated with admin set ups and users 
     Then User has been successfully logged in
 
   @smoke
+  @regression
   @allure.label.jira:QA-123
   @allure.label.jira:AE-2
   @allure.label.owner:MT
