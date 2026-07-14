@@ -32,10 +32,6 @@ public class ConfigHelper {
         return getProperty("password");
     }
 
-    public static String getHeadless() {
-        return getProperty("headless");
-    }
-
     public static String getScreenshotFilePath() {
         return getProperty("screenshot.file.path");
     }
