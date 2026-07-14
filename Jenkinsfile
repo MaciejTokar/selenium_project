@@ -3,13 +3,13 @@ pipeline {
     parameters {
         string(
         name: 'cucumberTag',
-        description: 'Description for parameters string with name tag cucumberTag. Default value of that field is "@smoke"'
+        description: 'Description for parameters string with name tag cucumberTag. Default value of that field is "@smoke"',
         defaultValue: '@smoke'
         )
 
         booleanParam(
-        name: 'headlessMode'
-        description: 'Setting the headless mode based on true or false options. Default value of that field is "false"'
+        name: 'headlessMode',
+        description: 'Setting the headless mode based on true or false options. Default value of that field is "false"',
         defaultValue: false
         )
 
