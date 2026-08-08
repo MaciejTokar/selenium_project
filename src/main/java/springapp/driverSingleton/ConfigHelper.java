@@ -32,6 +32,19 @@ public class ConfigHelper {
         return getProperty("prod");
     }
 
+    public static String chooseEnvironment(String environment) {
+        switch (environment) {
+            case "test":
+                return getTestEnvironment();
+            case "uat":
+                return getUatEnvironment();
+            case "prod":
+                return getProdEnvironment();
+            default:
+                throw new IllegalArgumentException("Illegal argument: " + environment);
+        }
+    }
+
     public static String getUsername() {
         return getProperty("username");
     }

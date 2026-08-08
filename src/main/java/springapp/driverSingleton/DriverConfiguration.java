@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
-import static springapp.driverSingleton.ConfigHelper.getTestEnvironment;
+import static springapp.driverSingleton.ConfigHelper.chooseEnvironment;
 
 public class DriverConfiguration {
 
@@ -41,7 +41,7 @@ public class DriverConfiguration {
     }
 
     private static void openBrowser() {
-        getDriver().get(getTestEnvironment());
+        getDriver().get(chooseEnvironment(System.getProperty("environment", "test")));
 //        getDriver().manage().window().maximize();
         getDriver().manage().window().setSize(new Dimension(1920,1080));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
