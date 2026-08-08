@@ -33,4 +33,18 @@ public class DashboardPageSteps {
                 .assertionContainsDashboardUrl()
                 .assertionGetDashboardHeaderText();
     }
+
+    @Then("Login result should be {string}")
+    public void login_result_should_be(String result) {
+        if (result.equalsIgnoreCase("Successful")) {
+            dashboardPage
+                    .assertionContainsDashboardUrl()
+                    .assertionGetDashboardHeaderText();
+        } else if (result.equalsIgnoreCase("Fail")) {
+            dashboardPage
+                    .assertionAccountDisabled();
+        } else {
+            throw new IllegalArgumentException("Invalid argument: " + result);
+        }
+    }
 }

@@ -7,8 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
-import static springapp.driverSingleton.ConfigHelper.getBaseUrl;
-import static springapp.driverSingleton.ConfigHelper.getHeadless;
+import static springapp.driverSingleton.ConfigHelper.getTestEnvironment;
 
 public class DriverConfiguration {
 
@@ -24,8 +23,7 @@ public class DriverConfiguration {
             chromeOptions.addArguments("--start-maximized");
             chromeOptions.addArguments("--disable-gpu");
             chromeOptions.addArguments("--remote-allow-origins=*");
-            boolean isHeadlessMode = Boolean.parseBoolean(getHeadless());
-            if (isHeadlessMode) {
+            if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
                 chromeOptions.addArguments("--headless=new");
             }
             webDriver = new ChromeDriver(chromeOptions);
@@ -43,7 +41,7 @@ public class DriverConfiguration {
     }
 
     private static void openBrowser() {
-        getDriver().get(getBaseUrl());
+        getDriver().get(getTestEnvironment());
 //        getDriver().manage().window().maximize();
         getDriver().manage().window().setSize(new Dimension(1920,1080));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));

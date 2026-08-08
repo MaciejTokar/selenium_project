@@ -20,8 +20,16 @@ public class ConfigHelper {
         return Duration.ofSeconds(getTimeout());
     }
 
-    public static String getBaseUrl() {
-        return getProperty("url");
+    public static String getTestEnvironment() {
+        return getProperty("test");
+    }
+
+    public static String getUatEnvironment() {
+        return getProperty("uat");
+    }
+
+    public static String getProdEnvironment() {
+        return getProperty("prod");
     }
 
     public static String getUsername() {
@@ -30,10 +38,6 @@ public class ConfigHelper {
 
     public static String getPassword() {
         return getProperty("password");
-    }
-
-    public static String getHeadless() {
-        return getProperty("headless");
     }
 
     public static String getScreenshotFilePath() {

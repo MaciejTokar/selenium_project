@@ -1,11 +1,11 @@
 package springapp.helpers;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
@@ -42,13 +42,13 @@ public class WaitHelper {
         return element;
     }
 
-    public String waitForUrl(String dashboardUrl) {
+    public String waitForUrl(String url) {
         try {
-            fluentWait.until(ExpectedConditions.urlContains(dashboardUrl));
+            fluentWait.until(ExpectedConditions.urlContains(url));
         } catch (TimeoutException e) {
-            throw new TimeoutException("Element is not clickable " + dashboardUrl, e);
+            throw new TimeoutException("Element is not clickable " + url, e);
         }
-        return dashboardUrl;
+        return url;
     }
 
     public void runAfterTimeout(Runnable action) {

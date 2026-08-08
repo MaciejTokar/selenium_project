@@ -1,13 +1,13 @@
 package springapp;
 
-import io.qameta.allure.Allure;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
 import io.cucumber.java.After;
-import org.slf4j.LoggerFactory;
 import io.cucumber.java.Before;
+import org.slf4j.LoggerFactory;
+import io.qameta.allure.Allure;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.time.LocalDateTime;
 import java.io.ByteArrayInputStream;
