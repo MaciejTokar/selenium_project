@@ -21,6 +21,9 @@ public class DashboardPage extends BasePage {
     @FindBy(css = "a[href*='viewPerformanceModule']")
     private WebElement performanceButton;
 
+    @FindBy(css = ".oxd-alert-content-text")
+    private WebElement accountDisabledAlert;
+
     public DashboardPage() {
         initElements(getDriver(), this);
     }
@@ -45,15 +48,20 @@ public class DashboardPage extends BasePage {
     }
 
     public DashboardPage assertionContainsDashboardUrl() {
-        String dashboardUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-        waitHelper.waitForUrl(dashboardUrl);
-        Assertions.assertEquals(dashboardUrl, getDashboardUrl());
+        String url = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
+        waitHelper.waitForUrl(url);
+        Assertions.assertEquals(url, getDashboardUrl());
         return this;
     }
 
     public DashboardPage assertionGetDashboardHeaderText() {
         waitHelper.waitForVisibility(dashboardHeader);
         Assertions.assertEquals("Dashboard", dashboardHeader.getText());
+        return this;
+    }
+
+    public DashboardPage assertionAccountDisabled() {
+        Assertions.assertEquals("Account disabled", accountDisabledAlert.getText());
         return this;
     }
 }

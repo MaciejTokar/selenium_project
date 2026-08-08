@@ -13,6 +13,11 @@ pipeline {
         defaultValue: false
         )
 
+        choice(
+        name: 'environment',
+        choices: ['test', 'uat', 'prod'],
+        description: 'Select the target browser for tests'
+        )
     }
     stages {
         stage('Run Tests') {

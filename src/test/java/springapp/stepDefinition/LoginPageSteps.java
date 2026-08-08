@@ -21,7 +21,7 @@ public class LoginPageSteps {
 
     @Given("I enter incorrect login into Username input")
     public void i_enter_incorrect_login_into_username_input() {
-        loginPage.enterUsernameInput("test");
+        loginPage.enterUsernameInput("incorrect");
     }
 
     @Given("I click on link 'Forgot your password?'")
