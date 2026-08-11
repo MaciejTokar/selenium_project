@@ -6,8 +6,6 @@ import java.util.Properties;
 
 public class ConfigHelper {
 
-    private static Integer timeout;
-
     private ConfigHelper() {}
 
     public static int getTimeout() {
@@ -30,6 +28,10 @@ public class ConfigHelper {
 
     public static String getProdEnvironment() {
         return getProperty("prod");
+    }
+
+    public static String getBrowser() {
+        return getProperty("browser");
     }
 
     public static String getUsername() {
