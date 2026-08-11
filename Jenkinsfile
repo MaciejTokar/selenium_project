@@ -21,8 +21,8 @@ pipeline {
 
         string(
         name: 'branch',
-        description: 'Enter name of the branch. Default value of that field is "main"',
-        trim: true
+        description: 'Enter name of the branch. Default value of that field is "main".',
+        trim: true,
         defaultValue: 'main',
         )
 
