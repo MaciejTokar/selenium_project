@@ -23,7 +23,7 @@ pipeline {
         name: 'branch',
         description: 'Enter name of the branch. Default value of that field is "main".',
         trim: true,
-        defaultValue: 'main',
+        defaultValue: 'main'
         )
 
         choice(
@@ -36,7 +36,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: params.branch,
-                    url: 'https://github.com/MaciejTokar/selenium_project',
+                    url: 'https://github.com/MaciejTokar/selenium_project'
             }
         }
         stage('Run Tests') {
