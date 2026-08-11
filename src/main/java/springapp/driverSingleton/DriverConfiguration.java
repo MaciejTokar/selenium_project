@@ -2,12 +2,12 @@ package springapp.driverSingleton;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
-import static springapp.driverSingleton.ConfigHelper.chooseEnvironment;
+import static springapp.driverSingleton.ConfigHelper.getBrowser;
+import static springapp.driverSingleton.BrowserFactory.chooseBrowser;
+import static springapp.driverSingleton.EnvironmentFactory.chooseEnvironment;
 
 public class DriverConfiguration {
 
@@ -18,15 +18,7 @@ public class DriverConfiguration {
 
     public static WebDriver getDriver() {
         if (webDriver == null) {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--window-size=1920,1080");
-            chromeOptions.addArguments("--start-maximized");
-            chromeOptions.addArguments("--disable-gpu");
-            chromeOptions.addArguments("--remote-allow-origins=*");
-            if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
-                chromeOptions.addArguments("--headless=new");
-            }
-            webDriver = new ChromeDriver(chromeOptions);
+            webDriver = chooseBrowser(System.getProperty("browser", getBrowser()));
             openBrowser();
         }
         return webDriver;
@@ -35,7 +27,9 @@ public class DriverConfiguration {
     public static void quitDriver() {
         if (webDriver != null) {
             webDriver.close();
-            webDriver.quit();
+            if (!System.getProperty("browser", getBrowser()).equalsIgnoreCase("firefox")) {
+                webDriver.quit();
+            }
             webDriver = null;
         }
     }

@@ -6,8 +6,6 @@ import java.util.Properties;
 
 public class ConfigHelper {
 
-    private static Integer timeout;
-
     private ConfigHelper() {}
 
     public static int getTimeout() {
@@ -32,17 +30,8 @@ public class ConfigHelper {
         return getProperty("prod");
     }
 
-    public static String chooseEnvironment(String environment) {
-        switch (environment) {
-            case "test":
-                return getTestEnvironment();
-            case "uat":
-                return getUatEnvironment();
-            case "prod":
-                return getProdEnvironment();
-            default:
-                throw new IllegalArgumentException("Illegal argument: " + environment);
-        }
+    public static String getBrowser() {
+        return getProperty("browser");
     }
 
     public static String getUsername() {
