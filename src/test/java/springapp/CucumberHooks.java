@@ -26,9 +26,9 @@ public class CucumberHooks {
 
     @Before
     public void initialization(final Scenario scenario) {
-        logger.info("Test scenario is running: " + logger.getName());
-        Allure.parameter("Browser", System.getProperty("browser", getBrowser()));
-        Allure.label("browser2", System.getProperty("browser", getBrowser()));
+        logger.info("Test scenario is running: " + scenario.getName());
+        String browser = System.getProperty("browser", getBrowser());
+        Allure.addAttachment("Browser", "text/plain", browser);
     }
 
     @After
