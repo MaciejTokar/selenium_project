@@ -35,11 +35,13 @@ public class ConfigHelper {
     }
 
     public static String getUsername() {
-        return getProperty("username");
+        System.out.println("username exist " + System.getenv("username") != null);
+        return System.getenv("username");
     }
 
     public static String getPassword() {
-        return getProperty("password");
+        System.out.println("password exist " + System.getenv("password") != null);
+        return System.getenv("password");
     }
 
     public static String getScreenshotFilePath() {

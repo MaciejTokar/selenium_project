@@ -1,23 +1,19 @@
 package springapp.actions;
 
-import springapp.page.CommonPage;
 import springapp.page.LeavePage;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import springapp.page.CommonPage;
 
 import java.util.Map;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class LeavePageActions extends LeavePage {
 
-    private final WebDriverWait webDriverWait;
     private final CommonPage commonPage;
 
     public LeavePageActions() {
         initElements(getDriver(), this);
-        webDriverWait = new WebDriverWait(getDriver(), getTimeoutDuration());
         commonPage = new CommonPage();
     }
 

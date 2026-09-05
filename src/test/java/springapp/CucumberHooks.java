@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.io.ByteArrayInputStream;
 import java.time.format.DateTimeFormatter;
 
+import static springapp.driverSingleton.ConfigHelper.getBrowser;
 import static springapp.utils.Screenshot.saveJpg;
 import static springapp.utils.Screenshot.takeScreenshot;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
@@ -25,7 +26,9 @@ public class CucumberHooks {
 
     @Before
     public void initialization(final Scenario scenario) {
-        logger.info("Test scenario is running: " + logger.getName());
+        logger.info("Test scenario is running: " + scenario.getName());
+        String browser = System.getProperty("browser", getBrowser());
+        Allure.addAttachment("Browser", "text/plain", browser);
     }
 
     @After

@@ -3,21 +3,21 @@ Feature: Login page and every test case associated with login page
   @smoke
   @regression
   Scenario: Successful logging in on OrangeHrm demo webside
-    Given I enter login 'Admin' into Username input
-    And I enter password 'admin123' into Password input
+    Given I enter login into Username input
+    And I enter password into Password input
     When I click on 'Login' button
     Then User has been successfully logged in
 
   @regression
   Scenario: Unsuccessful login with an incorrect username
     Given I enter incorrect login into Username input
-    And I enter password 'admin123' into Password input
+    And I enter password into Password input
     When I click on 'Login' button
     Then Announcement 'Invalid credentials' appear
 
   @regression
   Scenario: Unsuccessful login with an incorrect password
-    Given I enter login 'Admin' into Username input
+    Given I enter login into Username input
     And I enter incorrect 'password' into Password input
     When I click on 'Login' button
     Then Announcement 'Invalid credentials' appear
