@@ -42,8 +42,8 @@ pipeline {
     stage('Run Tests') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'd44f8203-3bc7-4560-a455-eeb214fd14c2', usernameVariable: 'username', passwordVariable: 'password')]) {
-          echo "username exist: ${env.username != true}"
-          echo "password exist: ${env.password != true}"
+          echo "username exist: ${env.username != null}"
+          echo "password exist: ${env.password != null}"
           bat """
           mvn clean test ^
             -Dtest = CucumberRunnerTest ^
