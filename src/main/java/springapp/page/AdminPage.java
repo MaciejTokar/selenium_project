@@ -9,10 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static springapp.utils.CsvUtils.validateCsvAndListSize;
-import static springapp.utils.StringGeneratorUtils.getUsername;
+import static springapp.utils.StringGeneratorUtils.generateUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
-import static springapp.utils.StringGeneratorUtils.getGeneratedPassword;
+import static springapp.utils.StringGeneratorUtils.generatedPassword;
 
 public class AdminPage extends BasePage {
 
@@ -159,7 +159,7 @@ public class AdminPage extends BasePage {
 
     public AdminPage enterUsernameInput(String username) {
         if (username.equalsIgnoreCase("generate")) {
-            usernameSearch = getUsername();
+            usernameSearch = generateUsername();
             typeText(usernameInput, usernameSearch);
         } else {
             usernameSearch = username;
@@ -176,7 +176,7 @@ public class AdminPage extends BasePage {
 
     public AdminPage enterPasswordInput(String password) {
         if (password.equalsIgnoreCase("generate")) {
-            confirmPassword = getGeneratedPassword();
+            confirmPassword = generatedPassword();
             typeText(passwordInput, confirmPassword);
         } else {
             confirmPassword = password;

@@ -35,11 +35,11 @@ public class ConfigHelper {
     }
 
     public static String getUsername() {
-        return getProperty("username");
+        return System.getenv("username");
     }
 
     public static String getPassword() {
-        return getProperty("password");
+        return System.getenv("password");
     }
 
     public static String getScreenshotFilePath() {

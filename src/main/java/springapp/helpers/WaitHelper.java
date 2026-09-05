@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
-import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
+import static springapp.driverSingleton.ConfigHelper.getTimeoutDuration;
 
 public class WaitHelper {
 

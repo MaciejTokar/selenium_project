@@ -8,11 +8,11 @@ public class StringGeneratorUtils {
 
     private StringGeneratorUtils() {}
 
-    public static String getGeneratedPassword() {
+    public static String generatedPassword() {
         return faker.internet().password(7, 8, true, true, true);
     }
 
-    public static String getUsername() {
+    public static String generateUsername() {
         String username;
         do {
             username = faker.name().username();

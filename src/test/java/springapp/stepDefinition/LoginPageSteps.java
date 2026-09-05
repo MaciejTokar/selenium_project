@@ -6,6 +6,9 @@ import io.cucumber.java.en.When;
 import springapp.page.LoginPage;
 import io.cucumber.java.en.Given;
 
+import static springapp.driverSingleton.ConfigHelper.getPassword;
+import static springapp.driverSingleton.ConfigHelper.getUsername;
+
 public class LoginPageSteps {
 
     private final LoginPage loginPage;
@@ -14,9 +17,9 @@ public class LoginPageSteps {
         loginPage = new LoginPage();
     }
 
-    @Given("I enter login {string} into Username input")
-    public void i_enter_login_into_username_input(String loginName) {
-        loginPage.enterUsernameInput(loginName);
+    @Given("I enter login into Username input")
+    public void i_enter_login_into_username_input() {
+        loginPage.enterUsernameInput(getUsername());
     }
 
     @Given("I enter incorrect login into Username input")
@@ -34,9 +37,9 @@ public class LoginPageSteps {
         loginPage.clickLoginButton();
     }
 
-    @And("I enter password {string} into Password input")
-    public void i_enter_password_into_password_input(String password) {
-        loginPage.enterPasswordInput(password);
+    @And("I enter password into Password input")
+    public void i_enter_password_into_password_input() {
+        loginPage.enterPasswordInput(getPassword());
     }
 
     @And("I enter incorrect {string} into Password input")
