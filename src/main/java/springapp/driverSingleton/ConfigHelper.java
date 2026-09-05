@@ -35,10 +35,12 @@ public class ConfigHelper {
     }
 
     public static String getUsername() {
+        System.out.println("username exist " + System.getenv("username") != null);
         return System.getenv("username");
     }
 
     public static String getPassword() {
+        System.out.println("password exist " + System.getenv("password") != null);
         return System.getenv("password");
     }
 
