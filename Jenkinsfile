@@ -46,7 +46,7 @@ pipeline {
           echo "password exist: ${env.password != null}"
           bat """
           mvn clean test ^
-            -Dtest = CucumberRunnerTest ^
+            -Dtest=CucumberRunnerTest ^
             "-Dcucumber.filter.tags=${params.cucumberTag}" ^
             "-Denvironment=${params.environment}" ^
             "-Dbrowser=${params.browser}" ^
