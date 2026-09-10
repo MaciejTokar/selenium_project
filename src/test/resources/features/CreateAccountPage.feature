@@ -1,8 +1,8 @@
 Feature: Creating accounts by Admin and checks that they are working properly
 
   Background:
-    Given I enter login 'Admin' into Username input
-    And I enter password 'admin123' into Password input
+    Given I enter login into Username input
+    And I enter password into Password input
     And I click on 'Login' button
     And I click 'Admin' panel on the header list
     Then I click 'Add' button

@@ -1,8 +1,8 @@
 Feature: Leave page and every test case associated with annual leave set up.
 
   Background:
-    Given I enter login 'Admin' into Username input
-    And I enter password 'admin123' into Password input
+    Given I enter login into Username input
+    And I enter password into Password input
     When I click on 'Login' button
     When User has been successfully logged in
     Then I click 'Leave' panel on the header list

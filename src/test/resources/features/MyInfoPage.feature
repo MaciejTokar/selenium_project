@@ -1,8 +1,8 @@
 Feature: My Info page and every test case associated with user settings.
 
   Background:
-    Given I enter login 'Admin' into Username input
-    And I enter password 'admin123' into Password input
+    Given I enter login into Username input
+    And I enter password into Password input
     When I click on 'Login' button
     Then User has been successfully logged in
 
