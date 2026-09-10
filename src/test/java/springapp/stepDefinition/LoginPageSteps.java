@@ -22,6 +22,16 @@ public class LoginPageSteps {
         loginPage.enterUsernameInput(getUsername());
     }
 
+    @Given("I enter login {string} into Username input")
+    public void i_enter_specified_login_into_username_input() {
+        loginPage.enterUsernameInput(getUsername());
+    }
+
+    @And("I enter password {string} into Password input")
+    public void i_enter_specified_password_into_password_input() {
+        loginPage.enterPasswordInput(getPassword());
+    }
+
     @Given("I enter incorrect login into Username input")
     public void i_enter_incorrect_login_into_username_input() {
         loginPage.enterUsernameInput("incorrect");

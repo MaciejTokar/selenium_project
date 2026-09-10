@@ -14,6 +14,8 @@ public class SoftAssert {
     private final List<AssertionError> listOfErrors = new ArrayList<>();
 
 
+//    TODO
+//    test z wykorzystaniem assertTrue / assertFalse
     public void assertTrue(boolean condition, String message) {
         try {
             if (condition) {

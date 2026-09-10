@@ -1,8 +1,8 @@
 Feature: Performance page and every test case associated with performance and managing reviews.
 
   Background:
-    Given I enter login 'Admin' into Username input
-    And I enter password 'admin123' into Password input
+    Given I enter login into Username input
+    And I enter password into Password input
     When I click on 'Login' button
     When User has been successfully logged in
     Then I click 'Performance' panel on the header list
