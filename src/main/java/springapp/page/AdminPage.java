@@ -9,10 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static springapp.utils.CsvUtils.validateCsvAndListSize;
-import static springapp.utils.StringGeneratorUtils.generateUsername;
 import static org.openqa.selenium.support.PageFactory.initElements;
-import static springapp.driverSingleton.DriverConfiguration.getDriver;
+import static springapp.utils.StringGeneratorUtils.generateUsername;
 import static springapp.utils.StringGeneratorUtils.generatedPassword;
+import static springapp.driverSingleton.DriverConfiguration.getDriver;
 
 public class AdminPage extends BasePage {
 

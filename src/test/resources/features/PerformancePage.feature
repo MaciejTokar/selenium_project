@@ -13,7 +13,6 @@ Feature: Performance page and every test case associated with performance and ma
     And I select job title "<title>" in Job Title dropdown
     And I select unit "<unit>" in Sub Unit dropdown
     And I select option "<option>" in Include dropdown
-#    Możliwe przerzucenie tego stepu do common page steps
     When I click 'Search' button
     Then No results found information is displayed
 

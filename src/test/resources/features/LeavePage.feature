@@ -17,7 +17,6 @@ Feature: Leave page and every test case associated with annual leave set up.
     And I select option "<duration>" in Duration dropdown
     And I click 'Assign' button
     And I click 'Ok' confirm button
-#    Tutaj przy tych samych ustawieniach raz wychodzi success,a raz inny pop up
     Then Confirmation is displayed
 
 #    TODO
@@ -46,7 +45,6 @@ Feature: Leave page and every test case associated with annual leave set up.
       | duration | <duration> |
     And I click 'Assign' button
     And I click 'Ok' confirm button
-#    Tutaj przy tych samych ustawieniach raz wychodzi success,a raz inny pop up
     Then Confirmation is displayed
 
     Examples:
@@ -61,10 +59,6 @@ Feature: Leave page and every test case associated with annual leave set up.
       | valid   | US - Matternity  | 2026-05-02 | 2026-10-02 | End Day Only      | Half Day - Afternoon |
       | valid   | US - Personal    | 2026-05-02 | 2026-10-02 | End Day Only      | Specify Time         |
       | valid   | US - Vacation    | 2026-05-02 | 2026-10-02 | Start And End Day | Half Day - Morning   |
-
-#    When I enter Assign Leave details - inny przykład zapisu
-#      | name   | options   | fromDate   | toDate   | partial   | duration   |
-#      | <name> | <options> | <fromDate> | <toDate> | <partial> | <duration> |
 
 
   Scenario: Verify that Assign Leave Panel contains all required leave types

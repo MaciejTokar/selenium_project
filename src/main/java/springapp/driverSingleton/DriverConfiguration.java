@@ -11,32 +11,32 @@ import static springapp.driverSingleton.EnvironmentFactory.chooseEnvironment;
 
 public class DriverConfiguration {
 
-    private static WebDriver webDriver;
+    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     private DriverConfiguration() {
     }
 
     public static WebDriver getDriver() {
-        if (webDriver == null) {
-            webDriver = chooseBrowser(System.getProperty("browser", getBrowser()));
+        if (webDriver.get() == null) {
+            WebDriver driver = chooseBrowser(System.getProperty("browser", getBrowser()));
+            webDriver.set(driver);
             openBrowser();
         }
-        return webDriver;
+        return webDriver.get();
     }
 
     public static void quitDriver() {
-        if (webDriver != null) {
-            webDriver.close();
+        if (webDriver.get() != null) {
+            webDriver.get().close();
             if (!System.getProperty("browser", getBrowser()).equalsIgnoreCase("firefox")) {
-                webDriver.quit();
+                webDriver.get().quit();
             }
-            webDriver = null;
+            webDriver.remove();
         }
     }
 
     private static void openBrowser() {
         getDriver().get(chooseEnvironment(System.getProperty("environment", "test")));
-//        getDriver().manage().window().maximize();
         getDriver().manage().window().setSize(new Dimension(1920,1080));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
     }

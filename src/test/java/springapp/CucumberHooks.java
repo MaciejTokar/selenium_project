@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 import java.io.ByteArrayInputStream;
 import java.time.format.DateTimeFormatter;
 
-import static springapp.driverSingleton.ConfigHelper.getBrowser;
 import static springapp.utils.Screenshot.saveJpg;
 import static springapp.utils.Screenshot.takeScreenshot;
+import static springapp.driverSingleton.ConfigHelper.getBrowser;
 import static springapp.driverSingleton.DriverConfiguration.getDriver;
 import static springapp.driverSingleton.DriverConfiguration.quitDriver;
 
@@ -26,7 +26,7 @@ public class CucumberHooks {
 
     @Before
     public void initialization(final Scenario scenario) {
-        logger.info("Test scenario is running: " + scenario.getName());
+        logger.info("Test scenario is running: " + scenario.getName() + " , " + "Thread ID: " + Thread.currentThread().threadId());
         String browser = System.getProperty("browser", getBrowser());
         Allure.addAttachment("Browser", "text/plain", browser);
     }
@@ -39,6 +39,6 @@ public class CucumberHooks {
             Allure.addAttachment("Failure screenshot" + scenario.getName(),  "image/jpg", new ByteArrayInputStream(screenshots), ".jpg");
         }
         quitDriver();
-        logger.info("Test scenario is ending: " + logger.getName());
+        logger.info("Test scenario is ending: " + logger.getName()  + " , " + "Thread ID closing: " + Thread.currentThread().threadId());
     }
 }

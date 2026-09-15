@@ -23,7 +23,6 @@ public class MyInfoPage extends BasePage {
     private WebElement contactDetailsButton;
 
     @FindBy(css = ".oxd-form-row:nth-of-type(1) .oxd-grid-item--gutters:nth-of-type(1) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) input", xpath = "//label[normalize-space()='Street 1']/following::input[1]")
-//    @FindBy(xpath = "//label[normalize-space()='Street 1']/following::input[1] | ")
     private WebElement streetOneInput;
 
     @FindBy(css = ".oxd-form-row:nth-of-type(1) .oxd-grid-item--gutters:nth-of-type(2) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) input")
@@ -41,13 +40,9 @@ public class MyInfoPage extends BasePage {
     @FindBy(css = ".oxd-form-row:nth-of-type(1) .oxd-grid-item--gutters:nth-of-type(6) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) .oxd-select-wrapper")
     private WebElement countryDropDown;
 
-//    @FindAll(@FindBy(css = ".oxd-form-row:nth-of-type(1) .oxd-grid-item--gutters:nth-of-type(6) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) .oxd-select-wrapper .oxd-select-dropdown div"))
     @FindAll(@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option']/span"))
     private List<WebElement> listOfCountryOption;
-    //div[@class='oxd-select-dropdown --positon-bottom']/div[@class='oxd-select-option'][2]/span
-    //div[@class='oxd-select-dropdown']/div[2]/span
 
-    //    .oxd-form-row:nth-of-type(1) .oxd-grid-item--gutters:nth-of-type(6) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) .oxd-select-wrapper .oxd-select-dropdown div span
     @FindBy(css = ".oxd-form-row:nth-of-type(2) .oxd-grid-item--gutters:nth-of-type(1) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) input")
     private WebElement homePhoneInput;
 
@@ -63,7 +58,6 @@ public class MyInfoPage extends BasePage {
     @FindBy(css = ".oxd-form-row:nth-of-type(3) .oxd-grid-item--gutters:nth-of-type(2) .oxd-input-field-bottom-space:nth-of-type(1) div:nth-of-type(2) input")
     private WebElement otherMailInput;
 
-//    @FindBy(css = ".oxd-button--text")
     @FindBy(className = "oxd-button--text")
     private WebElement addButton;
 

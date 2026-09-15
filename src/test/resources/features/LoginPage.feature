@@ -22,8 +22,6 @@ Feature: Login page and every test case associated with login page
     When I click on 'Login' button
     Then Announcement 'Invalid credentials' appear
 
-  @smoke
-  @regression
   Scenario: Reset password link sent successfully
     Given I click on link 'Forgot your password?'
     And I type 'Admin' into Username input
