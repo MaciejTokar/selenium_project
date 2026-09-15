@@ -9,9 +9,9 @@ import io.cucumber.datatable.DataTable;
 import org.junit.jupiter.api.Assertions;
 import springapp.actions.LeavePageActions;
 
+import java.util.Map;
 import java.util.List;
 import java.util.Collections;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static springapp.page.enums.LeaveType.listOfRequiredLeaveTypes;
@@ -88,7 +88,6 @@ public class LeavePageSteps {
                 .distinct()
                 .toList();
 
-//        listOfLeaveTypes.forEach(getLogger()::info);
         listOfLeaveTypes.forEach(leavePage.getLogger()::info);
 
 
