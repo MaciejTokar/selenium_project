@@ -6,6 +6,7 @@ Feature: My Info page and every test case associated with user settings.
     When I click on 'Login' button
     Then User has been successfully logged in
 
-    Scenario: Verify whether the buttons have links attached
+  @allure.label.jira:QA-200
+  Scenario: Verify whether the buttons have links attached
       Given I click 'My Info' panel on the header list
       Then I check if every button of menu have link attached
