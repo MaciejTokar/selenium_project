@@ -12,7 +12,7 @@ public class MyInfoPageSteps {
         myInfoPage = new MyInfoPage();
     }
 
-    @Given("I click 'My Info' panel on the header list")
+    @Given("I click My Info panel on the header list")
     public void i_click_my_info_panel_on_the_header_list() {
         myInfoPage.clickMyInfoButton();
     }
