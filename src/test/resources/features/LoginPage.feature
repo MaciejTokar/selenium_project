@@ -9,6 +9,7 @@ Feature: Login page and every test case associated with login page
     Then User has been successfully logged in
 
   @regression
+  @allure.label.jira:QA-201
   Scenario: Unsuccessful login with an incorrect username
     Given I enter incorrect login into Username input
     And I enter password into Password input
@@ -29,6 +30,7 @@ Feature: Login page and every test case associated with login page
     Then Reset password link has been successfully sent
 
   @smoke
+  @regression
   Scenario: Username is required to reset your password
     Given I click on link 'Forgot your password?'
     When I click on 'Reset Password' button
