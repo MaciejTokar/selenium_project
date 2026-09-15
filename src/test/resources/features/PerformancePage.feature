@@ -18,4 +18,4 @@ Feature: Performance page and every test case associated with performance and ma
 
     Examples:
       | name  | title             | unit        | option                     |
-      | valid | Account Assistant | Engineering | Current and Past Employees |
+      | valid | Software Engineer | Engineering | Current and Past Employees |
