@@ -30,6 +30,16 @@ public class AdminPageSteps {
         adminPageCsvData = readAdminData("csv/usersOrangeHrm.csv");
     }
 
+    @When("I confirm that i want to delete the user")
+    public void i_confirm_that_i_want_to_delete_the_user() {
+        adminPage.clickConfirmDeleteUserButton();
+    }
+
+    @And("I delete {string} from the list of users")
+    public void i_delete_user_from_the_list_of_users(String username) {
+        adminPage.deleteUserFromList(username);
+    }
+
     @And("I click 'Add' button")
     public void i_click_add_button() {
         adminPage.clickAddButton();
@@ -99,5 +109,10 @@ public class AdminPageSteps {
     @Then("Matching user account is displayed in the list")
     public void matching_user_account_is_displayed_in_the_list() {
         adminPage.assertionUserAccountMatchingData();
+    }
+
+    @Then("User {string} has been successfully deleted")
+    public void user_has_been_successfully_deleted(String username) {
+        adminPage.assertionDeletedUser(username);
     }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindAll;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static springapp.utils.CsvUtils.validateCsvAndListSize;
@@ -96,6 +97,12 @@ public class AdminPage extends BasePage {
 
     @FindAll(@FindBy(css = "div.oxd-table-row > div.oxd-table-cell.oxd-padding-cell:nth-child(5)"))
     private List<WebElement> listOfStatus;
+
+    @FindAll(@FindBy(css = ".bi-trash"))
+    private List<WebElement> listOfDeleteButtons;
+
+    @FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[2]")
+    private WebElement confirmDeleteButton;
 
     public AdminPage() {
         initElements(getDriver(), this);
@@ -227,5 +234,39 @@ public class AdminPage extends BasePage {
             softAssert.compareField("Status", status, csvStatus, i);
         }
         softAssert.assertAll();
+    }
+    
+    public AdminPage deleteUserFromList(String username) {
+        for (int i = 0; i < listOfUsername.size(); i++) {
+            if (listOfUsername.get(i).getText().equals(username)) {
+                clickDeleteUserButton(i);
+                return this;
+            }
+        }
+        throw new NoSuchElementException("Username not found " + username);
+    }
+
+    public AdminPage clickDeleteUserButton(int usernameId) {
+        if (usernameId > 0 || usernameId < listOfDeleteButtons.size()) {
+            listOfDeleteButtons.get(usernameId).click();
+            return this;
+        }
+
+        throw new NoSuchElementException("Delete button not found by ID: " + usernameId);
+    }
+
+    public AdminPage clickConfirmDeleteUserButton() {
+        clickButton(confirmDeleteButton);
+        return this;
+    }
+
+    public AdminPage assertionDeletedUser(String username) {
+        boolean isUserNotPresent = listOfUsername.stream()
+                .map(WebElement::getText)
+                .noneMatch(text -> text.equals(username));
+
+        assertTrue(isUserNotPresent, "User " + username + " still exist on the list");
+
+        return this;
     }
 }
