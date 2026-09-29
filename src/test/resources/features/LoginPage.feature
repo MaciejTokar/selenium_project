@@ -2,6 +2,7 @@ Feature: Login page and every test case associated with login page
 
   @smoke
   @regression
+  @allure.label.jira:QA-205
   Scenario: Successful logging in on OrangeHrm demo webside
     Given I enter login into Username input
     And I enter password into Password input
@@ -17,12 +18,14 @@ Feature: Login page and every test case associated with login page
     Then Announcement 'Invalid credentials' appear
 
   @regression
+  @allure.label.jira:QA-201
   Scenario: Unsuccessful login with an incorrect password
     Given I enter login into Username input
     And I enter incorrect 'password' into Password input
     When I click on 'Login' button
     Then Announcement 'Invalid credentials' appear
 
+  @allure.label.jira:QA-444
   Scenario: Reset password link sent successfully
     Given I click on link 'Forgot your password?'
     And I type 'Admin' into Username input
