@@ -7,6 +7,8 @@ Feature: Creating accounts by Admin and checks that they are working properly
     And I click 'Admin' panel on the header list
     Then I click 'Add' button
 
+  @allure.label.owner:MT
+  @blocker
   Scenario Outline: Verify if logging to account working properly
     Given I select "<role>" in User Role dropdown
     And I select "<status>" in Status dropdown

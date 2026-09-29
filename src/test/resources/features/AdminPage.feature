@@ -35,6 +35,9 @@ Feature: Admin page and every test case associated with admin set ups and users 
     When I fetch the expected list of users
     Then I verify compatibility data of records with csv file
 
+  @allure.label.jira:QA-124
+  @allure.label.jira:AE-3
+  @allure.label.owner:MT
   Scenario Outline: Delete user account by admin
     Given I click 'Admin' panel on the header list
     And I delete "<username>" from the list of users

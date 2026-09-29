@@ -7,6 +7,7 @@ Feature: My Info page and every test case associated with user settings.
     Then User has been successfully logged in
 
   @QA-200
+  @allure.label.owner:KK
   Scenario: Verify whether the buttons have links attached
       Given I click My Info panel on the header list
       Then I check if every button of menu have link attached
