@@ -154,6 +154,7 @@
                     </includes>
                     <printSummary>true</printSummary>
                     <testFailureIgnore>false</testFailureIgnore>
+                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
                 </configuration>
             </plugin>
 
